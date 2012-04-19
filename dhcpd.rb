@@ -493,8 +493,12 @@ class DhcpServer
 end
 
 Daemons.run_proc('dhcpd') do 
-  app = DhcpServer.new(ip,networks)
-  app.run
+  begin
+    app = DhcpServer.new(ip,networks)
+    app.run
+  rescue Interrupt => e 
+    # do nothing
+  end 
 end
 
 # test some options
