@@ -1,4 +1,5 @@
 require 'lib/options'
+require 'ipaddr'
 
 module PeDHCP
   class BootPacket
@@ -142,7 +143,15 @@ module PeDHCP
     def params
       @params
     end
+
+    def yiaddr_s
+      return IPAddr.new(yiaddr, Socket::AF_INET)
+    end
   
+    def giaddr_s
+      return IPAddr.new(giaddr, Socket::AF_INET)
+    end  
+
     def chaddr_s
       tmp = chaddr.unpack('CCCCCC')
       tmp.map { |c| sprintf("%02x",c) }.join(":")
@@ -173,7 +182,7 @@ module PeDHCP
          @params[m.to_s.chop.to_sym] = args[0]
          return
       end
-      $log.debug ("method_missing(#{m}, #{args.size})")
+      $log.debug("method_missing(#{m}, #{args.size})")
       raise NoMethodError.new
     end
   end
