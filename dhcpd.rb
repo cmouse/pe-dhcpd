@@ -100,7 +100,7 @@ class DhcpServer
          case imsg.type.type
             when MessageTypeOption::DISCOVER
               omsg = discover2offer(imsg)
-              $log.info "Offering #{omsg.yiaddr_s} to #{omsg.chaddr_s} via #{omsg.giaddr}"
+              $log.info "Offering #{omsg.yiaddr_s} to #{omsg.chaddr_s} via #{omsg.giaddr_s}"
             when MessageTypeOption::REQUEST
               omsg = request2ack(imsg)
               $log.info "Acknowleding #{omsg.chaddr_s} has #{omsg.yiaddr_s}"
