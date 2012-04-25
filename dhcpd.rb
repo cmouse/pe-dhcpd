@@ -14,17 +14,19 @@ require 'lib/bootpacket'
 include Log4r
 include PeDHCP
 
-ip = '1.2.3.4'
+# set to nil for guessing, otherwise specify
+ip = nil
 
 class DhcpServer
   def initialize(ip)
-    $log = Logger.new 'dhcpd'
-    #$log.outputters = SyslogOutputter.new('dhcpd', :logopt => 0x1, :facility => 'LOG_DAEMON')
-    $log.outputters = Outputter.stderr
-    $log.outputters[0].formatter = PatternFormatter.new(:pattern => "%M")
+    ip = guess_my_ip if ip.nil?
     @ip = ip
   end
 
+  def guess_my_ip
+    UDPSocket.open {|s| s.connect("8.8.8.8", 1); s.addr.last }
+  end
+ 
   def set_options(msg)
     # kill parameter request list and requested ip address
     msg.remove_option(55)
@@ -81,7 +83,7 @@ class DhcpServer
             data, addr = @socket.recvfrom(1500)
             imsg = BootPacket.new(data)
          rescue Exception => e
-            $log.debug "Processing error: #{e}\n#{e.backtrace.join("\n")}"
+            $log.error "Processing error: #{e}\n#{e.backtrace.join("\n")}"
 	    $log.debug "Dumping message packet for debug"
             str = data.bytes.map { |c| sprintf("%02x", c.to_i) }.join(' ');
             $log.debug str
@@ -98,8 +100,10 @@ class DhcpServer
          case imsg.type.type
             when MessageTypeOption::DISCOVER
               omsg = discover2offer(imsg)
+              $log.info "Offering #{omsg.yiaddr_s} to #{omsg.chaddr_s} via #{omsg.giaddr}"
             when MessageTypeOption::REQUEST
               omsg = request2ack(imsg)
+              $log.info "Acknowleding #{omsg.chaddr_s} has #{omsg.yiaddr_s}"
             else
               $log.debug "Received #{imsg.type} but cannot handle it" 
               next
@@ -112,11 +116,21 @@ class DhcpServer
   end
 end
 
-Daemons.run_proc('dhcpd') do 
+Daemons.run_proc('dhcpd', { :dir_mode => :system }) do 
   begin
+    $log = Logger.new 'dhcpd'
+    if Daemons.controller.options[:ontop] 
+      $log = Logger.new 'dhcpd'
+      $log.outputters = Outputter.stderr
+      $log.outputters[0].formatter = PatternFormatter.new(:pattern => "%d [%l]: %m")
+    else
+      $log.outputters = SyslogOutputter.new('dhcpd', :logopt => 0x1, :facility => 'LOG_DAEMON')
+      $log.outputters[0].formatter = PatternFormatter.new(:pattern => "%M")
+    end
     app = DhcpServer.new(ip)
     app.run
   rescue Interrupt => e 
+    $log.warn "Shutdown complete"
     # do nothing
   end 
 end
