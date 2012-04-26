@@ -134,7 +134,7 @@ class DhcpServer
   end
 end
 
-Daemons.run_proc('dhcpd', { :dir_mode => :system }) do 
+Daemons.run_proc('pe-dhcpd', { :dir_mode => :system }) do 
   begin
     $log = Logger.new 'dhcpd'
     if Daemons.controller.options[:ontop] 
