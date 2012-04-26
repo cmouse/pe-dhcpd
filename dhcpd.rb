@@ -90,24 +90,24 @@ class DhcpServer
             next
          end
 
-         $log.debug "Message received"
-         $log.debug imsg.to_s
-
          if imsg.valid? == false
            imsg.type = MessageTypeOption::REQUEST
          end
 
+         $log.info "Received #{imsg.type.type_s} from #{imsg.chaddr_s} via #{imsg.giaddr_s}"
+         $log.debug imsg.to_s
+
          case imsg.type.type
             when MessageTypeOption::DISCOVER
               omsg = discover2offer(imsg)
-              $log.info "Offering #{omsg.yiaddr_s} to #{omsg.chaddr_s} via #{omsg.giaddr_s}"
             when MessageTypeOption::REQUEST
               omsg = request2ack(imsg)
-              $log.info "Acknowleding #{omsg.chaddr_s} has #{omsg.yiaddr_s}"
             else
-              $log.debug "Received #{imsg.type} but cannot handle it" 
               next
          end
+
+         $log.info "Sending #{omsg.type.type_s} to #{imsg.yiaddr_s} #{imsg.chaddr_s} via #{imsg.giaddr_s}"
+         $log.debug omsg.to_s
 
          # send the packet back where it came from
          @socket.send omsg.pack, 0, addr[3], addr[1]
@@ -126,6 +126,7 @@ Daemons.run_proc('dhcpd', { :dir_mode => :system }) do
     else
       $log.outputters = SyslogOutputter.new('dhcpd', :logopt => 0x1, :facility => 'LOG_DAEMON')
       $log.outputters[0].formatter = PatternFormatter.new(:pattern => "%M")
+      $log.level = INFO
     end
     app = DhcpServer.new(ip)
     app.run
