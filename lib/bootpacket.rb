@@ -10,15 +10,20 @@ module PeDHCP
           1 => SubnetMaskOption,
           3 => RouterOption,
           6 => DomainNameServerOption,
+          12 => HostnameOption,
           42 => NetworkTimeProtocolServersOption,
           50 => RequestedIPAddressOption,
           51 => IPAddressLeaseTimeOption, 
-  	53 => MessageTypeOption,
+          53 => MessageTypeOption,
           54 => DHCPServerIdentifierOption,
           55 => ParameterRequestListOption,
+          57 => MaximumDHCPPacketSizeOption,
           58 => RenewalTimeValueOption,
-          59 => RebindingTimeValueOption
-    }	
+          59 => RebindingTimeValueOption,
+          60 => ClassIdentifierOption,
+          61 => DHCPClientIdentifierOption,
+          82 => RelayAgentInformationOption
+    }
   
     def initialize
       @params = {
@@ -28,11 +33,11 @@ module PeDHCP
         :hops => 0x0,
         :xid => 0x0,
         :secs => 0x0,
-        :flags => 0x0,	
+        :flags => 0x0,
         :ciaddr => 0x0,
         :yiaddr => 0x0,
         :siaddr => 0x0,
-        :giaddr => 0x0,	
+        :giaddr => 0x0,
         :chaddr => 0x0
        }
        @options = []
@@ -63,7 +68,7 @@ module PeDHCP
       offset =0
       loop do 
          oid,len=tmpOptions.unpack("@"+ offset.to_s + "C2")
-	 break if oid==0xff
+ break if oid==0xff
          value=tmpOptions.unpack("@" + (offset+2).to_s + "a" + len.to_s)
          value = value[0]
          offset += len+2
