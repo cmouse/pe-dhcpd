@@ -20,6 +20,7 @@
 # Description: Controls the PE-DHCP daemon
 ### END INIT INFO
 
+
 # makes things work when installed as service
 if File.symlink?(__FILE__) 
   $:.push File.dirname(File.readlink(__FILE__))
@@ -41,6 +42,8 @@ include PeDHCP
 
 # set to nil for guessing, otherwise specify
 ip = nil
+$dns = %w{ 195.10.132.196 195.10.132.203 }
+$ntp = %w{ 195.10.132.196 195.10.132.203 }
 
 class DhcpServer
   def initialize(ip)
@@ -61,9 +64,9 @@ class DhcpServer
     msg.set_option(DHCPServerIdentifierOption.new(@ip))
     msg.set_option(SubnetMaskOption.new("255.255.255.254"))
     msg.set_option(RouterOption.new(IPAddr.new(msg.giaddr, Socket::AF_INET).to_s))
-    msg.set_option(DomainNameServerOption.new(["195.10.132.196", "195.10.132.203"]))
+    msg.set_option(DomainNameServerOption.new($dns))
     msg.set_option(IPAddressLeaseTimeOption.new(0xA8C0))
-    msg.set_option(NetworkTimeProtocolServersOption.new(["195.10.132.196", "195.10.132.203"]))
+    msg.set_option(NetworkTimeProtocolServersOption.new($ntp))
     msg.set_option(RebindingTimeValueOption.new(0x93A8))
     msg.set_option(RenewalTimeValueOption.new(0x5460))
   end
