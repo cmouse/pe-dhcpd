@@ -1,6 +1,24 @@
 #!/usr/bin/ruby
 
 # (c) Aki Tuomi 2011 - See license. 
+# chkconfig for RedHat Linux...
+#
+# chkconfig: 345 99 00
+# description: Controls the PE-DHCP daemon
+# processname: pe-dhcpd
+
+# chkconfig/insserv for SUSE Linux...
+### BEGIN INIT INFO
+# Provides: pe-dhcpd
+# Required-Start: $all
+# Should-Start:
+# X-UnitedLinux-Should-Start:
+# Required-Stop:
+# Default-Start: 3 5
+# Default-Stop:
+# Short-Description: pe-dhcpd
+# Description: Controls the PE-DHCP daemon
+### END INIT INFO
 
 require 'rubygems'
 require 'log4r'
@@ -123,6 +141,7 @@ Daemons.run_proc('dhcpd', { :dir_mode => :system }) do
       $log = Logger.new 'dhcpd'
       $log.outputters = Outputter.stderr
       $log.outputters[0].formatter = PatternFormatter.new(:pattern => "%d [%l]: %m")
+      $log.level = DEBUG
     else
       $log.outputters = SyslogOutputter.new('dhcpd', :logopt => 0x1, :facility => 'LOG_DAEMON')
       $log.outputters[0].formatter = PatternFormatter.new(:pattern => "%M")
