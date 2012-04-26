@@ -20,6 +20,13 @@
 # Description: Controls the PE-DHCP daemon
 ### END INIT INFO
 
+# makes things work when installed as service
+if File.symlink?(__FILE__) 
+  $:.push File.dirname(File.readlink(__FILE__))
+else
+  $:.push File.dirname(__FILE__)
+end
+
 require 'rubygems'
 require 'log4r'
 require 'log4r/outputter/syslogoutputter'
