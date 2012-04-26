@@ -30,7 +30,91 @@ module PeDHCP
       return str
     end
   end
-  
+
+  class RelayAgentInformationOption < BootOption
+   def build(value)
+     @key = 82
+     @len = value.size
+     if value.is_a?(Array)
+       @value = value.pack("C*")
+     elsif value.is_a?(String)
+       @value = value
+     end
+   end
+
+   def to_s
+     str = "Relay Agent Information = "
+     str += @value.bytes.map { |b| sprintf("%02x",b) }.join
+     return str
+   end
+  end
+ 
+  class HostnameOption < BootOption
+   def build(value)
+     @key = 12
+     @len = value.size
+     if value.is_a?(Array)
+       @value = value.pack("C*")
+     elsif value.is_a?(String)
+       @value = value
+     end
+   end
+
+   def to_s
+     str = "Hostname = "
+     str += @value
+     return str
+   end
+  end
+
+  class MaximumDHCPPacketSizeOption < BootOption
+     def build(value)
+       @key = 57
+       @len = 2
+       @value = [value].pack('S')
+     end
+
+     def to_s
+       return "Maximum DHCP Packet Size = " + @value.unpack('S').to_s + " seconds"
+     end
+  end
+
+  class ClassIdentifierOption < BootOption
+   def build(value)
+     @key = 60
+     @len = value.size
+     if value.is_a?(Array)
+       @value = value.pack("C*")
+     elsif value.is_a?(String)
+       @value = value
+     end
+   end
+
+   def to_s
+     str = "Class Identifier = "
+     str += @value
+     return str
+   end
+  end
+
+  class DHCPClientIdentifierOption < BootOption
+   def build(value)
+     @key = 61
+     @len = value.size
+     if value.is_a?(Array)
+       @value = value.pack("C*")
+     elsif value.is_a?(String)
+       @value = value
+     end
+   end
+
+   def to_s
+     str = "DHCP Client Identifier = "
+     str += @value
+     return str
+   end
+  end
+
   class SubnetMaskOption < BootOption
    def build(value)
      @key = 1 
@@ -93,7 +177,7 @@ module PeDHCP
       while tmp1.size > 0 
        tmp2 << tmp1.shift(4).join('.')
       end
-      return tmp2.join("\n")
+      return str + tmp2.join(", ")
     end
   end
   
@@ -161,9 +245,9 @@ module PeDHCP
      def build(value)
        @key = 59
        @len = 4
-       @value = [value].pack('N').unpack('CCCC')
+       @value = [value].pack('N')
      end
-  
+ 
      def to_s
        return "Rebinding Time Value = " + @value.unpack('N').to_s + " seconds"
      end
@@ -211,37 +295,41 @@ module PeDHCP
     def type
       return @value.unpack("C")[0]
     end
-  
-    def to_s
-      case type
+ 
+    def type_s  
+       case type
         when DISCOVER
-          return "DHCP Message Type = Discover"
+          return "Discover"
         when OFFER
-          return "DHCP Message Type = Offer"
+          return "Offer"
         when REQUEST
-          return "DHCP Message Type = Request"
+          return "Request"
         when DECLINE
-          return "DHCP Message Type = Decline"
+          return "Decline"
         when ACK
-          return "DHCP Message Type = ACK"
+          return "ACK"
         when NAK
-          return "DHCP Message Type = NAK"
+          return "NAK"
         when RELEASE
-          return "DHCP Message Type = Release"
+          return "Release"
         when INFORM
-          return "DHCP Message Type = Inform"
+          return "Inform"
         when FORCERENEW
-          return "DHCP Message Type = ForceRenew"
+          return "ForceRenew"
         when LEASEQUERY
-          return "DHCP Message Type = LeaseQuery"
+          return "LeaseQuery"
         when LEASEUNASSIGNED
-          return "DHCP Message Type = LeaseUnassigned"
+          return "LeaseUnassigned"
         when LEASEUNKNOWN
-          return "DHCP Message Type = LeaseUnknown"
+          return "LeaseUnknown"
         when LEASEACTIVE
-          return "DHCP Message Type = LeaseActive"
+          return "LeaseActive"
       end
-      return "DHCP Message Type = Unknown"
+      return "Unknown"
+    end
+
+    def to_s
+      return "DHCP Message Type = #{self.type_s}"
     end
   end
   
@@ -269,7 +357,7 @@ module PeDHCP
       while tmp1.size > 0
        tmp2 << tmp1.shift(4).join('.')
       end
-      return tmp2.join("\n")
+      return str + tmp2.join(", ")
     end
   end
 end 
