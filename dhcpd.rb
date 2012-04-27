@@ -129,8 +129,8 @@ class DhcpServer
             imsg = BootPacket.new(data)
          rescue Exception => e
             $log.error "Processing error: #{e}\n#{e.backtrace.join("\n")}"
-	    $log.debug "Dumping message packet for debug"
-            str = data.bytes.map { |c| sprintf("%02x", c.to_i) }.join(' ');
+            $log.debug "Dumping message packet for debug"
+            str = data.bytes.map { |c| "%02x" % [c.to_i] }.join(' ');
             $log.debug str
             next
          end
@@ -141,6 +141,11 @@ class DhcpServer
 
          $log.info "Received #{imsg.type.type_s} from #{imsg.chaddr_s} via #{imsg.giaddr_s}"
          $log.debug imsg.to_s
+
+         if imsg.giaddr == 0 
+           $log.info "Cannot handle packet with no giaddr"
+           next
+         end
 
          case imsg.type.type
             when MessageTypeOption::DISCOVER

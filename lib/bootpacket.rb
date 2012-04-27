@@ -3,6 +3,8 @@ require 'ipaddr'
 
 module PeDHCP
   class BootPacket
+    attr_accessor :options
+
     REQUEST = 1
     REPLY = 2
   
@@ -68,7 +70,7 @@ module PeDHCP
       offset =0
       loop do 
          oid,len=tmpOptions.unpack("@"+ offset.to_s + "C2")
- break if oid==0xff
+         break if oid==0xff
          value=tmpOptions.unpack("@" + (offset+2).to_s + "a" + len.to_s)
          value = value[0]
          offset += len+2
@@ -81,14 +83,6 @@ module PeDHCP
   
          @options << option
       end
-    end
-  
-    def options
-      return @options
-    end
-  
-    def options=(value)
-      @options = value
     end
   
     def get_option(num)
@@ -132,7 +126,7 @@ module PeDHCP
       @options.each do |option|
          return option if option.is_a?(PeDHCP::MessageTypeOption)
       end
-      return nil
+      nil
     end
   
     def pack
@@ -153,7 +147,7 @@ module PeDHCP
       # must have valid type and op
       return false unless params[:cookie] == 0x63825363
       return false if type.nil? or type.is_a?(MessageTypeOption)==false or (op < 1 or op > 2) or (type.type < 1 or type.type > 13) 
-      return true
+      true
     end
   
     def params
@@ -161,16 +155,15 @@ module PeDHCP
     end
 
     def yiaddr_s
-      return IPAddr.new(yiaddr, Socket::AF_INET)
+      IPAddr.new(yiaddr, Socket::AF_INET)
     end
   
     def giaddr_s
-      return IPAddr.new(giaddr, Socket::AF_INET)
+      IPAddr.new(giaddr, Socket::AF_INET)
     end  
 
     def chaddr_s
-      tmp = chaddr.unpack('CCCCCC')
-      tmp.map { |c| sprintf("%02x",c) }.join(":")
+      "%02x%02x.%02x%02x.%02x%02x" % chaddr.unpack('CCCCCC')
     end
   
     def op_s
@@ -188,7 +181,7 @@ module PeDHCP
           str += "\t\t" + option.to_s + "\n"
       end
   
-      return str
+      str
     end
   
     def method_missing(m, *args, &block)

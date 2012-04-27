@@ -20,18 +20,18 @@ module PeDHCP
     end
   
     def get
-      return @value.unpack('C*')
+      @value.unpack('C*')
     end
 
     def pack 
       return [@key,@len].pack('CC') + @value if (@value.is_a?(String))
       return ([@key,@len]+@value).pack('CC*') if (@value.is_a?(Array))
+      ""
     end
   
     def to_s
       str = "Option #{@key} with #{@len} bytes of data: "
-      str += @value.unpack("C*").map { |c| sprintf("%02x", c) }.join(" ")
-      return str
+      str += @value.unpack("C*").map { |c| "%02x" % [c] }.join(" ")
     end
   end
 
@@ -48,8 +48,7 @@ module PeDHCP
 
    def to_s
      str = "Relay Agent Information = "
-     str += @value.bytes.map { |b| sprintf("%02x",b) }.join
-     return str
+     str += @value.bytes.map { |c| "%02x" % [c] }.join
    end
   end
  
@@ -67,7 +66,6 @@ module PeDHCP
    def to_s
      str = "Hostname = "
      str += @value
-     return str
    end
   end
 
@@ -79,7 +77,7 @@ module PeDHCP
      end
 
      def to_s
-       return "Maximum DHCP Packet Size = " + @value.unpack('S').to_s + " seconds"
+       "Maximum DHCP Packet Size = " + @value.unpack('S').to_s + " seconds"
      end
   end
 
@@ -97,7 +95,6 @@ module PeDHCP
    def to_s
      str = "Class Identifier = "
      str += @value
-     return str
    end
   end
 
@@ -115,7 +112,6 @@ module PeDHCP
    def to_s
      str = "DHCP Client Identifier = "
      str += @value
-     return str
    end
   end
 
@@ -135,7 +131,6 @@ module PeDHCP
    def to_s
      str = "Subnet mask = "
      str += @value.unpack("CCCC").join('.')
-     return str
    end
   end
   
@@ -153,7 +148,6 @@ module PeDHCP
    def to_s
      str = "Router = "
      str += @value.unpack("CCCC").join('.')
-     return str
    end
   end
   
@@ -181,7 +175,7 @@ module PeDHCP
       while tmp1.size > 0 
        tmp2 << tmp1.shift(4).join('.')
       end
-      return str + tmp2.join(", ")
+      str + tmp2.join(", ")
     end
   end
   
@@ -199,7 +193,6 @@ module PeDHCP
    def to_s
      str = "Requested IP Address = "
      str += @value.unpack("CCCC").join('.')
-     return str
    end
   end
   
@@ -217,7 +210,6 @@ module PeDHCP
    def to_s
      str = "DHCP Server Identifier = "
      str += @value.unpack("CCCC").join('.')
-     return str
    end
   end
   
@@ -229,7 +221,7 @@ module PeDHCP
      end
   
      def to_s
-       return "IP Address Lease Time = " + @value.unpack('N').to_s + " seconds"
+       "IP Address Lease Time = " + @value.unpack('N').to_s + " seconds"
      end
   end
   
@@ -241,7 +233,7 @@ module PeDHCP
      end
   
      def to_s
-       return "Renewal Time Value = " + @value.unpack('N').to_s + " seconds"
+       "Renewal Time Value = " + @value.unpack('N').to_s + " seconds"
      end
   end
   
@@ -253,7 +245,7 @@ module PeDHCP
      end
  
      def to_s
-       return "Rebinding Time Value = " + @value.unpack('N').to_s + " seconds"
+       "Rebinding Time Value = " + @value.unpack('N').to_s + " seconds"
      end
   end
   
@@ -267,7 +259,6 @@ module PeDHCP
     def to_s 
       str = "Parameter Request List = "
       str += @value.unpack("C*").join(",")
-      return str
     end
   end
   
@@ -329,11 +320,11 @@ module PeDHCP
         when LEASEACTIVE
           return "LeaseActive"
       end
-      return "Unknown"
+      "Unknown"
     end
 
     def to_s
-      return "DHCP Message Type = #{self.type_s}"
+      "DHCP Message Type = #{self.type_s}"
     end
   end
   
@@ -361,7 +352,7 @@ module PeDHCP
       while tmp1.size > 0
        tmp2 << tmp1.shift(4).join('.')
       end
-      return str + tmp2.join(", ")
+      str + tmp2.join(", ")
     end
   end
 end 
