@@ -70,7 +70,6 @@ class DhcpServer
     msg.remove_option(50)
 
     # overwrite/add required options
-    msg.set_option(DHCPServerIdentifierOption.new(@ip))
     msg.set_option(SubnetMaskOption.new("255.255.255.254"))
     msg.set_option(RouterOption.new(IPAddr.new(msg.giaddr, Socket::AF_INET).to_s))
     msg.set_option(DomainNameServerOption.new(DNS_SERVERS))
@@ -78,26 +77,33 @@ class DhcpServer
     msg.set_option(NetworkTimeProtocolServersOption.new(NTP_SERVERS))
     msg.set_option(RebindingTimeValueOption.new(REBIND_TIME))
     msg.set_option(RenewalTimeValueOption.new(RENEWAL_TIME))
+    msg.set_option(DHCPServerIdentifierOption.new(@ip))
 
     # kill anything that wasn't on parameter request list
     unless requested.nil?
        new_options = []
-       keep = requested.get
+       keep = requested.get + [53,54,60,61,82]
        msg.options.each do |option|
          # retain messagetypeoption even if it was not asked for...
-         new_options << option if keep.include?(option.key) or option.key == 53 or option.key == 82
+         if keep.include?(option.key) 
+           new_options << option
+         else 
+           $log.debug "Dropping #{option.class} as it's not wanted"
+         end
        end
        msg.options = new_options
     end
+
+    return msg
   end
 
   def request2reply(msg, type, flags)
     reply = msg.clone
     reply.yiaddr = reply.giaddr+1
     reply.op = BootPacket::REPLY
-    reply.type = type
     reply.flags = flags
-    set_options(reply)
+    reply = set_options(reply)
+    reply.type = type
     return reply
   end
 
