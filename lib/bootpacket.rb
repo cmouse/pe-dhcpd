@@ -101,9 +101,12 @@ module PeDHCP
     def set_option(value)
       @options.each do |option|
         if (option.key == value.key)
+          $log.debug "Replacing #{option.class}"
           option = value
+          return
         end
       end
+      $log.debug "Adding #{value.class}"
       @options << value
     end
  
