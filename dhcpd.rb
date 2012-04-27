@@ -139,8 +139,10 @@ class DhcpServer
            imsg.type = MessageTypeOption::REQUEST
          end
 
-         $log.info "Received #{imsg.type.type_s} from #{imsg.chaddr_s} via #{imsg.giaddr_s}"
+         $log.info "Received #{imsg.type.type_s} from #{imsg.ciaddr_s} #{imsg.chaddr_s} via #{imsg.giaddr_s}"
          $log.debug imsg.to_s
+
+         imsg.giaddr = imsg.ciaddr-1 if imsg.giaddr == 0 and imsg.ciaddr != 0
 
          if imsg.giaddr == 0 
            $log.info "Cannot handle packet with no giaddr"

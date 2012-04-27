@@ -154,6 +154,10 @@ module PeDHCP
       @params
     end
 
+    def ciaddr_s
+      IPAddr.new(ciaddr, Socket::AF_INET)
+    end
+
     def yiaddr_s
       IPAddr.new(yiaddr, Socket::AF_INET)
     end
