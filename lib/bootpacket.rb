@@ -91,6 +91,13 @@ module PeDHCP
       @options = value
     end
   
+    def get_option(num)
+      @options.each do |option|
+        return option if (option.key == num)
+      end 
+      return nil
+    end
+
     def set_option(value)
       @options.each do |option|
         if (option.key == value.key)
@@ -115,13 +122,14 @@ module PeDHCP
           return
         end
       end
-      @options << PeDHCP::MessageTypeOption.new(value)
+      set_option(PeDHCP::MessageTypeOption.new(value))
     end
   
     def type
       @options.each do |option|
          return option if option.is_a?(PeDHCP::MessageTypeOption)
       end
+      return nil
     end
   
     def pack
