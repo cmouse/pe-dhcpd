@@ -82,7 +82,7 @@ class DhcpServer
     # kill anything that wasn't on parameter request list
     unless requested.nil?
        new_options = []
-       keep = requested.get + [53,54,60,61,82]
+       keep = requested.get + [51,53,54,60,61,82]
        msg.options.each do |option|
          # retain messagetypeoption even if it was not asked for...
          if keep.include?(option.key) 
