@@ -53,6 +53,8 @@ class DhcpServer
   end
  
   def set_options(msg)
+    requested = msg.get_option(55)
+
     # kill parameter request list and requested ip address
     msg.remove_option(55)
     msg.remove_option(50)
@@ -66,33 +68,35 @@ class DhcpServer
     msg.set_option(NetworkTimeProtocolServersOption.new(["195.10.132.196", "195.10.132.203"]))
     msg.set_option(RebindingTimeValueOption.new(0x93A8))
     msg.set_option(RenewalTimeValueOption.new(0x5460))
+
+    # kill anything that wasn't on parameter request list
+    unless requested.nil?
+       new_options = []
+       keep = requested.get
+       msg.options.each do |option|
+         # retain messagetypeoption even if it was not asked for...
+         new_options << option if keep.include?(option.key) or option.key == 53 or option.key == 82
+       end
+       msg.options = new_options
+    end
   end
 
-  def discover2offer(msg)
-    offer = msg.clone
-    offer.yiaddr = offer.giaddr+1
-    offer.op = BootPacket::REPLY
-    offer.type = MessageTypeOption::OFFER
-    offer.flags = 0x8000
-    set_options(offer)
-    return offer
-  end
-
-  def request2ack(msg)
-    ack = msg.clone
-    ack.yiaddr = ack.giaddr+1
-    ack.op = BootPacket::REPLY
-    ack.type = MessageTypeOption::ACK
-    set_options(ack)
-    return ack
+  def request2reply(msg, type, flags)
+    reply = msg.clone
+    reply.yiaddr = reply.giaddr+1
+    reply.op = BootPacket::REPLY
+    reply.type = type
+    reply.flags = flags
+    set_options(reply)
+    return reply
   end
 
   def run
     $log.info "TDC DHCP started - Binding to #{@ip}:67"
 
-    # socket code
+     # socket code
     BasicSocket.do_not_reverse_lookup = true
-    @socket  = UDPSocket.new
+    @socket = UDPSocket.new
     @socket.setsockopt(Socket::SOL_SOCKET, Socket::SO_REUSEADDR, 1)
     @socket.bind(@ip, 67)
 
@@ -124,9 +128,9 @@ class DhcpServer
 
          case imsg.type.type
             when MessageTypeOption::DISCOVER
-              omsg = discover2offer(imsg)
+              omsg = request2reply(imsg, MessageTypeOption::OFFER, 0x8000)
             when MessageTypeOption::REQUEST
-              omsg = request2ack(imsg)
+              omsg = request2reply(imsg, MessageTypeOption::ACK, imsg.flags)
             else
               next
          end
