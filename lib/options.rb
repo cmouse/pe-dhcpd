@@ -215,7 +215,7 @@ module PeDHCP
    end
   
    def to_s
-     str = "Router = "
+     str = "DHCP Server Identifier = "
      str += @value.unpack("CCCC").join('.')
      return str
    end
