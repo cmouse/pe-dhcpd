@@ -1,6 +1,19 @@
 #!/usr/bin/ruby
 
 # (c) Aki Tuomi 2011 - See license. 
+
+## CONFIGURATION ##
+# set to nil for guessing, otherwise specify
+
+ip = nil
+DNS_SERVERS = %w{ 195.10.132.196 195.10.132.203 }
+NTP_SERVERS = %w{ 195.10.132.196 195.10.132.203 }
+LEASE_TIME = 86400
+REBIND_TIME = 37800
+RENEWAL_TIME = 28800
+
+## END CONFIGURATION ##
+
 # chkconfig for RedHat Linux...
 #
 # chkconfig: 345 99 00
@@ -39,9 +52,6 @@ require 'lib/bootpacket'
 include Log4r
 include PeDHCP
 
-# set to nil for guessing, otherwise specify
-ip = nil
-
 class DhcpServer
   def initialize(ip)
     ip = guess_my_ip if ip.nil?
@@ -63,11 +73,11 @@ class DhcpServer
     msg.set_option(DHCPServerIdentifierOption.new(@ip))
     msg.set_option(SubnetMaskOption.new("255.255.255.254"))
     msg.set_option(RouterOption.new(IPAddr.new(msg.giaddr, Socket::AF_INET).to_s))
-    msg.set_option(DomainNameServerOption.new(["195.10.132.196", "195.10.132.203"]))
-    msg.set_option(IPAddressLeaseTimeOption.new(0xA8C0))
-    msg.set_option(NetworkTimeProtocolServersOption.new(["195.10.132.196", "195.10.132.203"]))
-    msg.set_option(RebindingTimeValueOption.new(0x93A8))
-    msg.set_option(RenewalTimeValueOption.new(0x5460))
+    msg.set_option(DomainNameServerOption.new(DNS_SERVERS))
+    msg.set_option(IPAddressLeaseTimeOption.new(LEASE_TIME))
+    msg.set_option(NetworkTimeProtocolServersOption.new(NTP_SERVERS))
+    msg.set_option(RebindingTimeValueOption.new(REBIND_TIME))
+    msg.set_option(RenewalTimeValueOption.new(RENEWAL_TIME))
 
     # kill anything that wasn't on parameter request list
     unless requested.nil?
