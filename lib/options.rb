@@ -19,6 +19,10 @@ module PeDHCP
       end
     end
   
+    def get
+      return @value.unpack('C*')
+    end
+
     def pack 
       return [@key,@len].pack('CC') + @value if (@value.is_a?(String))
       return ([@key,@len]+@value).pack('CC*') if (@value.is_a?(Array))
