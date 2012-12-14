@@ -15,7 +15,8 @@ RENEWAL_TIME = 28800
 # Supports 00-00-00-00-00-00, 00:00:00:00:00:00, 0000.0000.0000
 # and you can add /prefix to create a mask. Prefix can be from 0 to 48
 # /48 is single address (default if omitted), and 0 is everything
-BLACKIST_MACS = %w{ b0:0b:00:00:00:00/24 test.addr.0000/40 }
+#BLACKIST_MACS = %w{ b0:0b:00:00:00:00/24 test.addr.0000/40 }
+BLACKLIST_MACS = []
 
 ## END CONFIGURATION ##
 
@@ -53,6 +54,7 @@ require 'socket'
 require 'ipaddr'
 require 'lib/options'
 require 'lib/bootpacket'
+require 'lib/macfilter'
 
 include Log4r
 include PeDHCP
@@ -125,6 +127,12 @@ class DhcpServer
     Process::Sys.setresgid(99,99,99)
     Process::Sys.setresuid(99,99,99)
 
+    # generate MacFilter
+    filter = MacFilterList.new
+    BLACKLIST_MACS.each do |mac|
+      filter << mac
+    end 
+
     loop do 
       read_array = Kernel.select [@socket], nil, nil, 10
       unless read_array.nil? 
@@ -142,6 +150,11 @@ class DhcpServer
 
          if imsg.valid? == false
            imsg.type = MessageTypeOption::REQUEST
+         end
+
+         if filter.include? imsg.chaddr 
+           $log.info "Ignoring DHCP from #{imsg.chaddr_s} due to blacklist"
+           next
          end
 
          $log.info "Received #{imsg.type.type_s} from #{imsg.ciaddr_s} #{imsg.chaddr_s} via #{imsg.giaddr_s}"
