@@ -11,6 +11,8 @@ NTP_SERVERS = %w{ 195.10.132.196 195.10.132.203 }
 LEASE_TIME = 86400
 REBIND_TIME = 37800
 RENEWAL_TIME = 28800
+YIADDR_POLICY = 1
+
 # You can filter here any MAC masks you do not wish to serve
 # Supports 00-00-00-00-00-00, 00:00:00:00:00:00, 0000.0000.0000
 # and you can add /prefix to create a mask. Prefix can be from 0 to 48
@@ -104,12 +106,22 @@ class DhcpServer
     return msg
   end
 
+  def giaddr2yiaddr(addr, mask)
+    if (addr.odd? and mask.to_bits == 30) or (not addr.odd? and mask.to_bits == 31)
+      addr += 1
+    elsif [31, 30].include? mask.to_bits
+      addr -= 1
+    else
+      addr += YIADDR_POLICY
+    end
+  end
+
   def request2reply(msg, type, flags)
     reply = msg.clone
-    reply.yiaddr = reply.giaddr+1
     reply.op = BootPacket::REPLY
     reply.flags = flags
     reply = set_options(reply)
+    reply.yiaddr = giaddr2yiaddr(reply.giaddr, reply.get_option(1))
     reply.type = type
     return reply
   end
@@ -186,24 +198,22 @@ class DhcpServer
   end
 end
 
-Daemons.run_proc('pe-dhcpd', { :dir_mode => :system }) do 
+Daemons.run_proc('pe-dhcpd', { :dir_mode => :system }) do
   begin
     $log = Logger.new 'dhcpd'
     $log.outputters = SyslogOutputter.new('dhcpd', :logopt => 0x1, :facility => 'LOG_DAEMON')
     $log.outputters[0].formatter = PatternFormatter.new(:pattern => "%M")
     $log.level = INFO
 
-    if Daemons.controller.options[:ontop] 
-      $log = Logger.new 'dhcpd'
-      $log.outputters = Outputter.stderr
+    if Daemons.controller.options[:ontop]
+      $log.outputters[1] = Outputter.stderr
       $log.outputters[1].formatter = PatternFormatter.new(:pattern => "%d [%l]: %m")
-      $log.level = DEBUG
     end
 
     app = DhcpServer.new(ip)
     app.run
-  rescue Interrupt => e 
+  rescue Interrupt => e
     $log.warn "Shutdown complete"
     # do nothing
-  end 
+  end
 end

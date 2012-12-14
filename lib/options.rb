@@ -130,7 +130,7 @@ module PeDHCP
    
    def to_bits
      # convert directly into prefix
-     x = @value
+     x = @value.unpack("I")[0]
      x = x - ((x>>1) & 0x55555555)
      x = (x & 0x33333333) + ((x>>2) & 0x33333333)
      x = (x + (x >> 4)) & 0x0F0F0F0F
