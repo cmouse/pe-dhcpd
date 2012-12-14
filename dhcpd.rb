@@ -11,6 +11,11 @@ NTP_SERVERS = %w{ 195.10.132.196 195.10.132.203 }
 LEASE_TIME = 86400
 REBIND_TIME = 37800
 RENEWAL_TIME = 28800
+# You can filter here any MAC masks you do not wish to serve
+# Supports 00-00-00-00-00-00, 00:00:00:00:00:00, 0000.0000.0000
+# and you can add /prefix to create a mask. Prefix can be from 0 to 48
+# /48 is single address (default if omitted), and 0 is everything
+BLACKIST_MACS = %w{ b0:0b:00:00:00:00/24 test.addr.0000/40 }
 
 ## END CONFIGURATION ##
 
@@ -171,16 +176,17 @@ end
 Daemons.run_proc('pe-dhcpd', { :dir_mode => :system }) do 
   begin
     $log = Logger.new 'dhcpd'
+    $log.outputters = SyslogOutputter.new('dhcpd', :logopt => 0x1, :facility => 'LOG_DAEMON')
+    $log.outputters[0].formatter = PatternFormatter.new(:pattern => "%M")
+    $log.level = INFO
+
     if Daemons.controller.options[:ontop] 
       $log = Logger.new 'dhcpd'
       $log.outputters = Outputter.stderr
-      $log.outputters[0].formatter = PatternFormatter.new(:pattern => "%d [%l]: %m")
+      $log.outputters[1].formatter = PatternFormatter.new(:pattern => "%d [%l]: %m")
       $log.level = DEBUG
-    else
-      $log.outputters = SyslogOutputter.new('dhcpd', :logopt => 0x1, :facility => 'LOG_DAEMON')
-      $log.outputters[0].formatter = PatternFormatter.new(:pattern => "%M")
-      $log.level = INFO
     end
+
     app = DhcpServer.new(ip)
     app.run
   rescue Interrupt => e 
