@@ -10,15 +10,16 @@ require 'ipaddr'
 s = UDPSocket.new
 
 p = DHCP::Discover.new
-p.giaddr = IPAddr.new('1.2.3.4').to_i
+p.giaddr = IPAddr.new('127.0.0.1').to_i
 
 puts p
 
-s.send p.pack, 0, '1.2.3.4', 67
+s.send p.pack, 0, '127.0.0.1', 67
 
 d, addr = s.recvfrom(1500)
 
-t = DHCP::Message.from_udp_payload(d)puts t
+t = DHCP::Message.from_udp_payload(d)
+puts t
 # build packet to send
 p = DHCP::Request.new
 
