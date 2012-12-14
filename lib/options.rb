@@ -129,12 +129,14 @@ module PeDHCP
    end
    
    def to_bits
-     bits=0
-     while(((@value<<bits) & 0xFFFFFFFF)>0)
-      bits += 1
-     end
-     bits -= 1 if (((@value<<bits) & 0xFFFFFFFF)==0)
-     bits
+     # convert directly into prefix
+     x = @value
+     x = x - ((x>>1) & 0x55555555)
+     x = (x & 0x33333333) + ((x>>2) & 0x33333333)
+     x = (x + (x >> 4)) & 0x0F0F0F0F
+     x = x + (x >> 8)
+     x = x + (x >> 16)
+     x & 0x0000003F
    end
 
    def to_s
