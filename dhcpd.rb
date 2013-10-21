@@ -4,14 +4,21 @@
 
 ## CONFIGURATION ##
 # set to nil for guessing, otherwise specify
-
 ip = nil
 DNS_SERVERS = %w{ 195.10.132.196 195.10.132.203 }
 NTP_SERVERS = %w{ 195.10.132.196 195.10.132.203 }
 LEASE_TIME = 86400
 REBIND_TIME = 37800
 RENEWAL_TIME = 28800
+## Set this to true if you want to select netmask
+## based on the oddity of giaddr
+##
+## odd giaddr gives mask /30, even giaddr gives mask /31
+YIADDR_POLICY_30_OR_31_MASK = false
+## offset to apply to giaddr
 YIADDR_POLICY = 1
+## default subnet mask to use
+SUBNET_MASK = '255.255.255.254'
 
 # You can filter here any MAC masks you do not wish to serve
 # Supports 00-00-00-00-00-00, 00:00:00:00:00:00, 0000.0000.0000
@@ -79,7 +86,15 @@ class DhcpServer
     msg.remove_option(50)
 
     # overwrite/add required options
-    msg.set_option(SubnetMaskOption.new("255.255.255.254"))
+    if YIADDR_POLICY_30_OR_31_MASK
+       if msg.giaddr.odd?
+          msg.set_option(SubnetMaskOption.new('255.255.255.252'))
+       else
+          msg.set_option(SubnetMaskOption.new('255.255.255.254'))
+       end
+    else
+       msg.set_option(SubnetMaskOption.new(SUBNET_MASK))
+    end
     msg.set_option(RouterOption.new(IPAddr.new(msg.giaddr, Socket::AF_INET).to_s))
     msg.set_option(DomainNameServerOption.new(DNS_SERVERS))
     msg.set_option(IPAddressLeaseTimeOption.new(LEASE_TIME))
@@ -116,12 +131,17 @@ class DhcpServer
     end
   end
 
+
   def request2reply(msg, type, flags)
     reply = msg.clone
     reply.op = BootPacket::REPLY
     reply.flags = flags
     reply = set_options(reply)
-    reply.yiaddr = giaddr2yiaddr(reply.giaddr, reply.get_option(1))
+    if YIADDR_POLICY_30_OR_31_MASK
+      reply.yiaddr = reply.giaddr + 1
+    else
+      reply.yiaddr = giaddr2yiaddr(reply.giaddr, reply.get_option(1))
+    end
     reply.type = type
     return reply
   end
