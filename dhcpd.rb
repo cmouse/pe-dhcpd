@@ -12,6 +12,7 @@ LEASE_TIME = 86400
 REBIND_TIME = 37800
 RENEWAL_TIME = 28800
 YIADDR_POLICY = 1
+SUBNET_MASK = '255.255.255.0'
 
 # You can filter here any MAC masks you do not wish to serve
 # Supports 00-00-00-00-00-00, 00:00:00:00:00:00, 0000.0000.0000
@@ -79,7 +80,7 @@ class DhcpServer
     msg.remove_option(50)
 
     # overwrite/add required options
-    msg.set_option(SubnetMaskOption.new("255.255.255.254"))
+    msg.set_option(SubnetMaskOption.new(SUBNET_MASK))
     msg.set_option(RouterOption.new(IPAddr.new(msg.giaddr, Socket::AF_INET).to_s))
     msg.set_option(DomainNameServerOption.new(DNS_SERVERS))
     msg.set_option(IPAddressLeaseTimeOption.new(LEASE_TIME))
