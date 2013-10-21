@@ -35,7 +35,7 @@ p.xid = t.xid
 
 puts p
 
-s.send p.pack, 0, '1.2.3.4', 67
+s.send p.pack, 0, '127.0.0.1', 67
 
 d, addr = s.recvfrom(1500)
 t = DHCP::Message.from_udp_payload(d)
