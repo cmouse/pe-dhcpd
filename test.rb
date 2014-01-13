@@ -1,9 +1,13 @@
 #!/usr/bin/ruby
 
 require 'rubygems'
+require 'bundler/setup'
 require 'socket'
 require 'net-dhcp'
 require 'ipaddr'
+require 'pe-dhcpd'
+
+include PeDHCPd
 
 # send to 1.2.3.4 / 67
 
@@ -20,6 +24,7 @@ d, addr = s.recvfrom(1500)
 
 t = DHCP::Message.from_udp_payload(d)
 puts t
+
 # build packet to send
 p = DHCP::Request.new
 

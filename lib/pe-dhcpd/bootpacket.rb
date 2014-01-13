@@ -1,4 +1,4 @@
-require 'lib/options'
+require 'pe-dhcpd/options'
 require 'ipaddr'
 
 module PeDHCPd
