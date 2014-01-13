@@ -1,14 +1,24 @@
+PATH
+  remote: .
+  specs:
+    pe-dhcpd (1.0)
+      daemons
+      log4r
+      net-dhcp
+
 GEM
   remote: https://rubygems.org/
   specs:
     daemons (1.1.9)
     log4r (1.1.10)
-    net-dhcp (1.1.1)
+    net-dhcp (1.2.1)
+    rake (10.1.1)
+    yard (0.8.7.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  daemons
-  log4r
-  net-dhcp
+  pe-dhcpd!
+  rake
+  yard

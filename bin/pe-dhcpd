@@ -1,5 +1,8 @@
 #!/usr/bin/ruby
 
+require 'rubygems'
+require 'bundle/setup'
+
 # (c) Aki Tuomi 2011 - See license. 
 
 ## CONFIGURATION ##
@@ -55,7 +58,6 @@ else
   $:.push File.dirname(__FILE__)
 end
 
-require 'rubygems'
 require 'log4r'
 require 'log4r/outputter/syslogoutputter'
 require 'daemons'
