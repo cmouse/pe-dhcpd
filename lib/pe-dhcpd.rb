@@ -6,7 +6,6 @@ require 'rubygems'
 require 'bundler/setup'
 require 'log4r'
 require 'log4r/outputter/syslogoutputter'
-require 'daemons'
 require 'socket'
 require 'ipaddr'
 

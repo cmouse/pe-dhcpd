@@ -2,8 +2,8 @@
 
 require 'rubygems'
 require 'bundler/setup'
-require 'pe-dhcpd'
 require 'daemons'
+require 'pe-dhcpd'
 
 config_file = ENV['PE_DHCPD_CONFIG_FILE'] || "/etc/pe-dhcpd.conf"
 
