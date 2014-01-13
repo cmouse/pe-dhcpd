@@ -17,7 +17,7 @@ require 'pe-dhcpd/macfilter'
 module PeDHCPd
 
   class DhcpServer
-    def log=
+    def log=(log)
       @log = log
     end
   
@@ -108,7 +108,7 @@ module PeDHCPd
              return false unless hook.new.process(msg)
          elsif hook.class == Proc
              return false unless hook.call(msg)
-         elsif hook.responds_to? :process
+         elsif hook.respond_to? :process
              return false unless hook.process(msg)
          else
              log.fatal "#{type.class} is not a Class or Hook, nor does it have process(msg)"

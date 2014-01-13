@@ -30,8 +30,8 @@ SUBNET_MASK = '255.255.255.254'
 BLACKLIST_MACS = []
 
 # Define here one or more hooks to run at each stage
-# Remember to require your hooks! Hook must be a Class
-# or Proc
+# Remember to require your hooks! Hook must be a 
+# Class, Proc or a function 
 #
 # HOOK SIGNATURE
 #   def process(msg)
@@ -46,7 +46,7 @@ BLACKLIST_MACS = []
 # Make sure you know what you are doing if you modify it
 
 HOOKS = {
- :discover => [],
+ :discover => [ Proc.new { raise "I have a gun!" } ],
  :offer => [],
  :request => [],
  :acknowledge => []
