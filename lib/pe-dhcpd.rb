@@ -117,7 +117,19 @@ module PeDHCPd
       end
       true
     end
- 
+
+    def run_main_hook
+      if MAIN_LOOP_HOOK.nil? == false
+        if MAIN_LOOP_HOOK.class == Class
+          MAIN_LOOP_HOOK.new.run
+        elsif MAIN_LOOP_HOOK.class == Proc
+          MAIN_LOOP_HOOK.call
+        elsif MAIN_LOOP_HOOK.respond_to? :run
+          MAIN_LOOP_HOOK.run
+        end
+      end
+    end 
+
     def run
       Vars.log.info "TDC DHCP started - Binding to #{@ip}:67"
   
@@ -137,6 +149,8 @@ module PeDHCPd
         filter << mac
       end 
   
+      run_main_hook
+
       loop do 
         read_array = Kernel.select [@socket], nil, nil, 10
         unless read_array.nil? 
@@ -190,16 +204,8 @@ module PeDHCPd
            # send the packet back where it came from
            @socket.send omsg.pack, 0, addr[3], addr[1]
         end
-   
-        if MAIN_LOOP_HOOK.nil? == false
-          if MAIN_LOOP_HOOK.class == Class
-            MAIN_LOOP_HOOK.new.run
-          elsif MAIN_LOOP_HOOK.class == Proc
-            MAIN_LOOP_HOOK.call 
-          elsif MAIN_LOOP_HOOK.respond_to? :run
-            MAIN_LOOP_HOOK.run
-          end 
-        end
+
+        run_main_hook
       end
     end
   end
