@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
    s.authors = ['Aki Tuomi', 'Saku Ytti']
    s.email = 'cmouse@cmouse.fi'
    s.files = `git ls-files`.split /\n/
+   s.executables = %w( pe-dhcpd )
    s.homepage = 'https://github.com/cmouse/pe-dhcpd'
    s.add_runtime_dependency 'log4r'
    s.add_runtime_dependency 'daemons'
