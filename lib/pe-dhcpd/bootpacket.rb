@@ -95,12 +95,12 @@ module PeDHCPd
     def set_option(value)
       @options.each do |option|
         if (option.key == value.key)
-          $log.debug "Replacing #{option.class}"
+          Vars.log.debug "Replacing #{option.class}"
           option = value
           return
         end
       end
-      $log.debug "Adding #{value.class}"
+      Vars.log.debug "Adding #{value.class}"
       @options << value
     end
  
@@ -195,7 +195,7 @@ module PeDHCPd
          @params[m.to_s.chop.to_sym] = args[0]
          return
       end
-      $log.debug("method_missing(#{m}, #{args.size})")
+      Vars.log.debug("method_missing(#{m}, #{args.size})")
       raise NoMethodError.new
     end
   end

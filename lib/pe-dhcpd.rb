@@ -3,7 +3,6 @@
 # (c) Aki Tuomi 2011 - See license.
 
 require 'rubygems'
-require 'bundler/setup'
 require 'log4r'
 require 'log4r/outputter/syslogoutputter'
 require 'socket'
@@ -14,16 +13,18 @@ require 'pe-dhcpd/bootpacket'
 require 'pe-dhcpd/macfilter'
 
 module PeDHCPd
-
-  class DhcpServer
+  class Vars
+    class << self
     def log=(log)
       @log = log
     end
-  
+
     def log
       @log
     end
-  
+  end
+
+  class DhcpServer
     def initialize(ip)
       ip = guess_my_ip if ip.nil?
       @ip = ip
@@ -67,7 +68,7 @@ module PeDHCPd
            if keep.include?(option.key) 
              new_options << option
            else 
-             log.debug "Dropping #{option.class} as it's not wanted"
+             Vars.log.debug "Dropping #{option.class} as it's not wanted"
            end
          end
          msg.options = new_options
@@ -110,14 +111,14 @@ module PeDHCPd
          elsif hook.respond_to? :process
              return false unless hook.process(msg)
          else
-             log.fatal "#{type.class} is not a Class or Hook, nor does it have process(msg)"
+             Vars.log.fatal "#{type.class} is not a Class or Hook, nor does it have process(msg)"
          end
       end
       true
     end
  
     def run
-      log.info "TDC DHCP started - Binding to #{@ip}:67"
+      Vars.log.info "TDC DHCP started - Binding to #{@ip}:67"
   
        # socket code
       BasicSocket.do_not_reverse_lookup = true
@@ -143,10 +144,10 @@ module PeDHCPd
               data, addr = @socket.recvfrom(1500)
               imsg = BootPacket.new(data)
            rescue Exception => e
-              log.error "Processing error: #{e}\n#{e.backtrace.join("\n")}"
-              log.debug "Dumping message packet for debug"
+              Vars.log.error "Processing error: #{e}\n#{e.backtrace.join("\n")}"
+              Vars.log.debug "Dumping message packet for debug"
               str = data.bytes.map { |c| "%02x" % [c.to_i] }.join(' ');
-              log.debug str
+              Vars.log.debug str
               next
            end
   
@@ -155,17 +156,17 @@ module PeDHCPd
            end
   
            if filter.include? imsg.chaddr 
-             log.info "Ignoring DHCP from #{imsg.chaddr_s} due to blacklist"
+             Vars.log.info "Ignoring DHCP from #{imsg.chaddr_s} due to blacklist"
              next
            end
   
-           log.info "Received #{imsg.type.type_s} from #{imsg.ciaddr_s} #{imsg.chaddr_s} via #{imsg.giaddr_s}"
-           log.debug imsg.to_s
+           Vars.log.info "Received #{imsg.type.type_s} from #{imsg.ciaddr_s} #{imsg.chaddr_s} via #{imsg.giaddr_s}"
+           Vars.log.debug imsg.to_s
   
            imsg.giaddr = imsg.ciaddr-1 if imsg.giaddr == 0 and imsg.ciaddr != 0
   
            if imsg.giaddr == 0 
-             log.info "Cannot handle packet with no giaddr"
+             Vars.log.info "Cannot handle packet with no giaddr"
              next
            end
   
@@ -182,8 +183,8 @@ module PeDHCPd
                 next
            end
   
-           log.info "Sending #{omsg.type.type_s} to #{imsg.yiaddr_s} #{imsg.chaddr_s} via #{imsg.giaddr_s}"
-           log.debug omsg.to_s
+           Vars.log.info "Sending #{omsg.type.type_s} to #{imsg.yiaddr_s} #{imsg.chaddr_s} via #{imsg.giaddr_s}"
+           Vars.log.debug omsg.to_s
   
            # send the packet back where it came from
            @socket.send omsg.pack, 0, addr[3], addr[1]
