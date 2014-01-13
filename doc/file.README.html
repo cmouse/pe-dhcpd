@@ -77,10 +77,26 @@
 
 <p>Look at contrib/pe-dhcpd.init or contrib/upstart.conf, and use 
 the one that suits your needs. Modify as needed.</p>
+
+<h2>Extending</h2>
+
+<p>There are now support for HOOKS in the configuration. If you need to 
+load extra gems, run the process with custom Gemfile.</p>
+
+<p>env BUNDLE_GEMFILE=&quot;/path/to/gemfile&quot;. Yon can get example contents
+from contrib/pe-dhcpd.gem</p>
+
+<p>This allows you to extend the system using custom ruby gems and your
+own code. </p>
+
+<p>To write a hook, you need a Class, Proc of function, which you can add
+to :discover, :offer, :reply, :acknowledge arrays in HOOKS variable. </p>
+
+<p>See configuration file for details. </p>
 </div></div>
 
     <div id="footer">
-  Generated on Mon Jan 13 15:42:22 2014 by
+  Generated on Mon Jan 13 16:56:10 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-1.8.7).
 </div>

@@ -689,7 +689,7 @@ Returns a new instance of BootPacket
      <span class='rubyid_@params ivar id'>@params</span><span class='lbrack token'>[</span><span class='rubyid_m identifier id'>m</span><span class='dot token'>.</span><span class='rubyid_to_s identifier id'>to_s</span><span class='dot token'>.</span><span class='rubyid_chop identifier id'>chop</span><span class='dot token'>.</span><span class='rubyid_to_sym identifier id'>to_sym</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='rubyid_args identifier id'>args</span><span class='lbrack token'>[</span><span class='integer val'>0</span><span class='rbrack token'>]</span>
      <span class='rubyid_return return kw'>return</span>
   <span class='rubyid_end end kw'>end</span>
-  <span class='rubyid_$log gvar id'>$log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span><span class='lparen token'>(</span><span class='dstring node'>&quot;method_missing(#{m}, #{args.size})&quot;</span><span class='rparen token'>)</span>
+  <span class='rubyid_Vars constant id'>Vars</span><span class='dot token'>.</span><span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span><span class='lparen token'>(</span><span class='dstring node'>&quot;method_missing(#{m}, #{args.size})&quot;</span><span class='rparen token'>)</span>
   <span class='rubyid_raise identifier id'>raise</span> <span class='rubyid_NoMethodError constant id'>NoMethodError</span><span class='dot token'>.</span><span class='rubyid_new identifier id'>new</span>
 <span class='rubyid_end end kw'>end</span>
 </pre>
@@ -1078,12 +1078,12 @@ Returns the value of attribute options
 <span class='rubyid_def def kw'>def</span> <span class='rubyid_set_option identifier id'>set_option</span><span class='lparen token'>(</span><span class='rubyid_value identifier id'>value</span><span class='rparen token'>)</span>
   <span class='rubyid_@options ivar id'>@options</span><span class='dot token'>.</span><span class='rubyid_each identifier id'>each</span> <span class='rubyid_do do kw'>do</span> <span class='bitor op'>|</span><span class='rubyid_option identifier id'>option</span><span class='bitor op'>|</span>
     <span class='rubyid_if if kw'>if</span> <span class='lparen token'>(</span><span class='rubyid_option identifier id'>option</span><span class='dot token'>.</span><span class='rubyid_key identifier id'>key</span> <span class='eq op'>==</span> <span class='rubyid_value identifier id'>value</span><span class='dot token'>.</span><span class='rubyid_key identifier id'>key</span><span class='rparen token'>)</span>
-      <span class='rubyid_$log gvar id'>$log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='dstring node'>&quot;Replacing #{option.class}&quot;</span>
+      <span class='rubyid_Vars constant id'>Vars</span><span class='dot token'>.</span><span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='dstring node'>&quot;Replacing #{option.class}&quot;</span>
       <span class='rubyid_option identifier id'>option</span> <span class='assign token'>=</span> <span class='rubyid_value identifier id'>value</span>
       <span class='rubyid_return return kw'>return</span>
     <span class='rubyid_end end kw'>end</span>
   <span class='rubyid_end end kw'>end</span>
-  <span class='rubyid_$log gvar id'>$log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='dstring node'>&quot;Adding #{value.class}&quot;</span>
+  <span class='rubyid_Vars constant id'>Vars</span><span class='dot token'>.</span><span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='dstring node'>&quot;Adding #{value.class}&quot;</span>
   <span class='rubyid_@options ivar id'>@options</span> <span class='lshft op'>&lt;&lt;</span> <span class='rubyid_value identifier id'>value</span>
 <span class='rubyid_end end kw'>end</span>
 </pre>
@@ -1310,7 +1310,7 @@ Returns the value of attribute options
 </div>
 
     <div id="footer">
-  Generated on Mon Jan 13 15:42:24 2014 by
+  Generated on Mon Jan 13 16:56:12 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-1.8.7).
 </div>

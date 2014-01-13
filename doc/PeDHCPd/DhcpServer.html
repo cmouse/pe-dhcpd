@@ -210,50 +210,6 @@ A new instance of DhcpServer.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#log-instance_method" title="#log (instance method)">- (Object) <strong>log</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#log%3D-instance_method" title="#log= (instance method)">- (Object) <strong>log=</strong>(log) </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#request2reply-instance_method" title="#request2reply (instance method)">- (Object) <strong>request2reply</strong>(msg, type, flags) </a>
     
 
@@ -350,13 +306,13 @@ Returns a new instance of DhcpServer
       <pre class="lines">
 
 
-28
 29
 30
-31</pre>
+31
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 29</span>
 
 <span class='rubyid_def def kw'>def</span> <span class='rubyid_initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='rubyid_ip identifier id'>ip</span><span class='rparen token'>)</span>
   <span class='rubyid_ip identifier id'>ip</span> <span class='assign token'>=</span> <span class='rubyid_guess_my_ip identifier id'>guess_my_ip</span> <span class='rubyid_if if_mod kw'>if</span> <span class='rubyid_ip identifier id'>ip</span><span class='dot token'>.</span><span class='rubyid_nil? fid id'>nil?</span>
@@ -390,7 +346,6 @@ Returns a new instance of DhcpServer
       <pre class="lines">
 
 
-105
 106
 107
 108
@@ -403,10 +358,11 @@ Returns a new instance of DhcpServer
 115
 116
 117
-118</pre>
+118
+119</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 105</span>
+      <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 106</span>
 
 <span class='rubyid_def def kw'>def</span> <span class='rubyid_call_hook identifier id'>call_hook</span><span class='lparen token'>(</span><span class='rubyid_type identifier id'>type</span><span class='comma token'>,</span> <span class='rubyid_msg identifier id'>msg</span><span class='rparen token'>)</span>
   <span class='rubyid_HOOKS constant id'>HOOKS</span><span class='lbrack token'>[</span><span class='rubyid_type identifier id'>type</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='rubyid_each identifier id'>each</span> <span class='rubyid_do do kw'>do</span> <span class='bitor op'>|</span><span class='rubyid_hook identifier id'>hook</span><span class='bitor op'>|</span>
@@ -417,7 +373,7 @@ Returns a new instance of DhcpServer
      <span class='rubyid_elsif elsif kw'>elsif</span> <span class='rubyid_hook identifier id'>hook</span><span class='dot token'>.</span><span class='rubyid_respond_to? fid id'>respond_to?</span> <span class='symbol val'>:process</span>
          <span class='rubyid_return return kw'>return</span> <span class='rubyid_false false kw'>false</span> <span class='rubyid_unless unless_mod kw'>unless</span> <span class='rubyid_hook identifier id'>hook</span><span class='dot token'>.</span><span class='rubyid_process identifier id'>process</span><span class='lparen token'>(</span><span class='rubyid_msg identifier id'>msg</span><span class='rparen token'>)</span>
      <span class='rubyid_else else kw'>else</span>
-         <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_fatal identifier id'>fatal</span> <span class='dstring node'>&quot;#{type.class} is not a Class or Hook, nor does it have process(msg)&quot;</span>
+         <span class='rubyid_Vars constant id'>Vars</span><span class='dot token'>.</span><span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_fatal identifier id'>fatal</span> <span class='dstring node'>&quot;#{type.class} is not a Class or Hook, nor does it have process(msg)&quot;</span>
      <span class='rubyid_end end kw'>end</span>
   <span class='rubyid_end end kw'>end</span>
   <span class='rubyid_true true kw'>true</span>
@@ -443,7 +399,6 @@ Returns a new instance of DhcpServer
       <pre class="lines">
 
 
-80
 81
 82
 83
@@ -451,10 +406,11 @@ Returns a new instance of DhcpServer
 85
 86
 87
-88</pre>
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 81</span>
 
 <span class='rubyid_def def kw'>def</span> <span class='rubyid_giaddr2yiaddr identifier id'>giaddr2yiaddr</span><span class='lparen token'>(</span><span class='rubyid_addr identifier id'>addr</span><span class='comma token'>,</span> <span class='rubyid_mask identifier id'>mask</span><span class='rparen token'>)</span>
   <span class='rubyid_if if kw'>if</span> <span class='lparen token'>(</span><span class='rubyid_addr identifier id'>addr</span><span class='dot token'>.</span><span class='rubyid_odd? fid id'>odd?</span> <span class='rubyid_and and kw'>and</span> <span class='rubyid_mask identifier id'>mask</span><span class='dot token'>.</span><span class='rubyid_to_bits identifier id'>to_bits</span> <span class='eq op'>==</span> <span class='integer val'>30</span><span class='rparen token'>)</span> <span class='rubyid_or or kw'>or</span> <span class='lparen token'>(</span><span class='rubyid_not not kw'>not</span> <span class='rubyid_addr identifier id'>addr</span><span class='dot token'>.</span><span class='rubyid_odd? fid id'>odd?</span> <span class='rubyid_and and kw'>and</span> <span class='rubyid_mask identifier id'>mask</span><span class='dot token'>.</span><span class='rubyid_to_bits identifier id'>to_bits</span> <span class='eq op'>==</span> <span class='integer val'>31</span><span class='rparen token'>)</span>
@@ -486,77 +442,15 @@ Returns a new instance of DhcpServer
       <pre class="lines">
 
 
-33
 34
-35</pre>
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 34</span>
 
 <span class='rubyid_def def kw'>def</span> <span class='rubyid_guess_my_ip identifier id'>guess_my_ip</span>
   <span class='rubyid_UDPSocket constant id'>UDPSocket</span><span class='dot token'>.</span><span class='rubyid_open identifier id'>open</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='rubyid_s identifier id'>s</span><span class='bitor op'>|</span> <span class='rubyid_s identifier id'>s</span><span class='dot token'>.</span><span class='rubyid_connect identifier id'>connect</span><span class='lparen token'>(</span><span class='string val'>&quot;8.8.8.8&quot;</span><span class='comma token'>,</span> <span class='integer val'>1</span><span class='rparen token'>)</span><span class='semicolon token'>;</span> <span class='rubyid_s identifier id'>s</span><span class='dot token'>.</span><span class='rubyid_addr identifier id'>addr</span><span class='dot token'>.</span><span class='rubyid_last identifier id'>last</span> <span class='rbrace token'>}</span>
-<span class='rubyid_end end kw'>end</span>
-</pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="log-instance_method">
-  
-    - (<tt>Object</tt>) <strong>log</strong> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-24
-25
-26</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 24</span>
-
-<span class='rubyid_def def kw'>def</span> <span class='rubyid_log identifier id'>log</span>
-  <span class='rubyid_@log ivar id'>@log</span>
-<span class='rubyid_end end kw'>end</span>
-</pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="log=-instance_method">
-  
-    - (<tt>Object</tt>) <strong>log=</strong>(log) 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-20
-21
-22</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 20</span>
-
-<span class='rubyid_def def kw'>def</span> <span class='rubyid_log= identifier id'>log=</span><span class='lparen token'>(</span><span class='rubyid_log identifier id'>log</span><span class='rparen token'>)</span>
-  <span class='rubyid_@log ivar id'>@log</span> <span class='assign token'>=</span> <span class='rubyid_log identifier id'>log</span>
 <span class='rubyid_end end kw'>end</span>
 </pre>
     </td>
@@ -579,7 +473,6 @@ Returns a new instance of DhcpServer
       <pre class="lines">
 
 
-91
 92
 93
 94
@@ -591,10 +484,11 @@ Returns a new instance of DhcpServer
 100
 101
 102
-103</pre>
+103
+104</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 92</span>
 
 <span class='rubyid_def def kw'>def</span> <span class='rubyid_request2reply identifier id'>request2reply</span><span class='lparen token'>(</span><span class='rubyid_msg identifier id'>msg</span><span class='comma token'>,</span> <span class='rubyid_type identifier id'>type</span><span class='comma token'>,</span> <span class='rubyid_flags identifier id'>flags</span><span class='rparen token'>)</span>
   <span class='rubyid_reply identifier id'>reply</span> <span class='assign token'>=</span> <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_clone identifier id'>clone</span>
@@ -630,7 +524,6 @@ Returns a new instance of DhcpServer
       <pre class="lines">
 
 
-120
 121
 122
 123
@@ -703,13 +596,14 @@ Returns a new instance of DhcpServer
 190
 191
 192
-193</pre>
+193
+194</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 120</span>
+      <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 121</span>
 
 <span class='rubyid_def def kw'>def</span> <span class='rubyid_run identifier id'>run</span>
-  <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_info identifier id'>info</span> <span class='dstring node'>&quot;TDC DHCP started - Binding to #{@ip}:67&quot;</span>
+  <span class='rubyid_Vars constant id'>Vars</span><span class='dot token'>.</span><span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_info identifier id'>info</span> <span class='dstring node'>&quot;TDC DHCP started - Binding to #{@ip}:67&quot;</span>
   
    <span class='comment val'># socket code</span>
   <span class='rubyid_BasicSocket constant id'>BasicSocket</span><span class='dot token'>.</span><span class='rubyid_do_not_reverse_lookup identifier id'>do_not_reverse_lookup</span> <span class='assign token'>=</span> <span class='rubyid_true true kw'>true</span>
@@ -735,10 +629,10 @@ Returns a new instance of DhcpServer
           <span class='rubyid_data identifier id'>data</span><span class='comma token'>,</span> <span class='rubyid_addr identifier id'>addr</span> <span class='assign token'>=</span> <span class='rubyid_@socket ivar id'>@socket</span><span class='dot token'>.</span><span class='rubyid_recvfrom identifier id'>recvfrom</span><span class='lparen token'>(</span><span class='integer val'>1500</span><span class='rparen token'>)</span>
           <span class='rubyid_imsg identifier id'>imsg</span> <span class='assign token'>=</span> <span class='rubyid_BootPacket constant id'>BootPacket</span><span class='dot token'>.</span><span class='rubyid_new identifier id'>new</span><span class='lparen token'>(</span><span class='rubyid_data identifier id'>data</span><span class='rparen token'>)</span>
        <span class='rubyid_rescue rescue kw'>rescue</span> <span class='rubyid_Exception constant id'>Exception</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='rubyid_e identifier id'>e</span>
-          <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_error identifier id'>error</span> <span class='dstring node'>&quot;Processing error: #{e}\n#{e.backtrace.join(&quot;\n&quot;)}&quot;</span>
-          <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='string val'>&quot;Dumping message packet for debug&quot;</span>
+          <span class='rubyid_Vars constant id'>Vars</span><span class='dot token'>.</span><span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_error identifier id'>error</span> <span class='dstring node'>&quot;Processing error: #{e}\n#{e.backtrace.join(&quot;\n&quot;)}&quot;</span>
+          <span class='rubyid_Vars constant id'>Vars</span><span class='dot token'>.</span><span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='string val'>&quot;Dumping message packet for debug&quot;</span>
           <span class='rubyid_str identifier id'>str</span> <span class='assign token'>=</span> <span class='rubyid_data identifier id'>data</span><span class='dot token'>.</span><span class='rubyid_bytes identifier id'>bytes</span><span class='dot token'>.</span><span class='rubyid_map identifier id'>map</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='rubyid_c identifier id'>c</span><span class='bitor op'>|</span> <span class='string val'>&quot;%02x&quot;</span> <span class='mod op'>%</span> <span class='lbrack token'>[</span><span class='rubyid_c identifier id'>c</span><span class='dot token'>.</span><span class='rubyid_to_i identifier id'>to_i</span><span class='rbrack token'>]</span> <span class='rbrace token'>}</span><span class='dot token'>.</span><span class='rubyid_join identifier id'>join</span><span class='lparen token'>(</span><span class='string val'>' '</span><span class='rparen token'>)</span><span class='semicolon token'>;</span>
-          <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='rubyid_str identifier id'>str</span>
+          <span class='rubyid_Vars constant id'>Vars</span><span class='dot token'>.</span><span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='rubyid_str identifier id'>str</span>
           <span class='rubyid_next next kw'>next</span>
        <span class='rubyid_end end kw'>end</span>
   
@@ -747,17 +641,17 @@ Returns a new instance of DhcpServer
        <span class='rubyid_end end kw'>end</span>
   
        <span class='rubyid_if if kw'>if</span> <span class='rubyid_filter identifier id'>filter</span><span class='dot token'>.</span><span class='rubyid_include? fid id'>include?</span> <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_chaddr identifier id'>chaddr</span> 
-         <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_info identifier id'>info</span> <span class='dstring node'>&quot;Ignoring DHCP from #{imsg.chaddr_s} due to blacklist&quot;</span>
+         <span class='rubyid_Vars constant id'>Vars</span><span class='dot token'>.</span><span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_info identifier id'>info</span> <span class='dstring node'>&quot;Ignoring DHCP from #{imsg.chaddr_s} due to blacklist&quot;</span>
          <span class='rubyid_next next kw'>next</span>
        <span class='rubyid_end end kw'>end</span>
   
-       <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_info identifier id'>info</span> <span class='dstring node'>&quot;Received #{imsg.type.type_s} from #{imsg.ciaddr_s} #{imsg.chaddr_s} via #{imsg.giaddr_s}&quot;</span>
-       <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_to_s identifier id'>to_s</span>
+       <span class='rubyid_Vars constant id'>Vars</span><span class='dot token'>.</span><span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_info identifier id'>info</span> <span class='dstring node'>&quot;Received #{imsg.type.type_s} from #{imsg.ciaddr_s} #{imsg.chaddr_s} via #{imsg.giaddr_s}&quot;</span>
+       <span class='rubyid_Vars constant id'>Vars</span><span class='dot token'>.</span><span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_to_s identifier id'>to_s</span>
   
        <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_giaddr identifier id'>giaddr</span> <span class='assign token'>=</span> <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_ciaddr identifier id'>ciaddr</span><span class='minus op'>-</span><span class='integer val'>1</span> <span class='rubyid_if if_mod kw'>if</span> <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_giaddr identifier id'>giaddr</span> <span class='eq op'>==</span> <span class='integer val'>0</span> <span class='rubyid_and and kw'>and</span> <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_ciaddr identifier id'>ciaddr</span> <span class='neq op'>!=</span> <span class='integer val'>0</span>
   
        <span class='rubyid_if if kw'>if</span> <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_giaddr identifier id'>giaddr</span> <span class='eq op'>==</span> <span class='integer val'>0</span> 
-         <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_info identifier id'>info</span> <span class='string val'>&quot;Cannot handle packet with no giaddr&quot;</span>
+         <span class='rubyid_Vars constant id'>Vars</span><span class='dot token'>.</span><span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_info identifier id'>info</span> <span class='string val'>&quot;Cannot handle packet with no giaddr&quot;</span>
          <span class='rubyid_next next kw'>next</span>
        <span class='rubyid_end end kw'>end</span>
   
@@ -774,8 +668,8 @@ Returns a new instance of DhcpServer
             <span class='rubyid_next next kw'>next</span>
        <span class='rubyid_end end kw'>end</span>
   
-       <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_info identifier id'>info</span> <span class='dstring node'>&quot;Sending #{omsg.type.type_s} to #{imsg.yiaddr_s} #{imsg.chaddr_s} via #{imsg.giaddr_s}&quot;</span>
-       <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='rubyid_omsg identifier id'>omsg</span><span class='dot token'>.</span><span class='rubyid_to_s identifier id'>to_s</span>
+       <span class='rubyid_Vars constant id'>Vars</span><span class='dot token'>.</span><span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_info identifier id'>info</span> <span class='dstring node'>&quot;Sending #{omsg.type.type_s} to #{imsg.yiaddr_s} #{imsg.chaddr_s} via #{imsg.giaddr_s}&quot;</span>
+       <span class='rubyid_Vars constant id'>Vars</span><span class='dot token'>.</span><span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='rubyid_omsg identifier id'>omsg</span><span class='dot token'>.</span><span class='rubyid_to_s identifier id'>to_s</span>
   
        <span class='comment val'># send the packet back where it came from</span>
        <span class='rubyid_@socket ivar id'>@socket</span><span class='dot token'>.</span><span class='rubyid_send identifier id'>send</span> <span class='rubyid_omsg identifier id'>omsg</span><span class='dot token'>.</span><span class='rubyid_pack identifier id'>pack</span><span class='comma token'>,</span> <span class='integer val'>0</span><span class='comma token'>,</span> <span class='rubyid_addr identifier id'>addr</span><span class='lbrack token'>[</span><span class='integer val'>3</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='rubyid_addr identifier id'>addr</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span>
@@ -803,7 +697,6 @@ Returns a new instance of DhcpServer
       <pre class="lines">
 
 
-37
 38
 39
 40
@@ -844,10 +737,11 @@ Returns a new instance of DhcpServer
 75
 76
 77
-78</pre>
+78
+79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 38</span>
 
 <span class='rubyid_def def kw'>def</span> <span class='rubyid_set_options identifier id'>set_options</span><span class='lparen token'>(</span><span class='rubyid_msg identifier id'>msg</span><span class='rparen token'>)</span>
   <span class='rubyid_requested identifier id'>requested</span> <span class='assign token'>=</span> <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_get_option identifier id'>get_option</span><span class='lparen token'>(</span><span class='integer val'>55</span><span class='rparen token'>)</span>
@@ -883,7 +777,7 @@ Returns a new instance of DhcpServer
        <span class='rubyid_if if kw'>if</span> <span class='rubyid_keep identifier id'>keep</span><span class='dot token'>.</span><span class='rubyid_include? fid id'>include?</span><span class='lparen token'>(</span><span class='rubyid_option identifier id'>option</span><span class='dot token'>.</span><span class='rubyid_key identifier id'>key</span><span class='rparen token'>)</span> 
          <span class='rubyid_new_options identifier id'>new_options</span> <span class='lshft op'>&lt;&lt;</span> <span class='rubyid_option identifier id'>option</span>
        <span class='rubyid_else else kw'>else</span> 
-         <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='dstring node'>&quot;Dropping #{option.class} as it's not wanted&quot;</span>
+         <span class='rubyid_Vars constant id'>Vars</span><span class='dot token'>.</span><span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='dstring node'>&quot;Dropping #{option.class} as it's not wanted&quot;</span>
        <span class='rubyid_end end kw'>end</span>
      <span class='rubyid_end end kw'>end</span>
      <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_options identifier id'>options</span> <span class='assign token'>=</span> <span class='rubyid_new_options identifier id'>new_options</span>
@@ -902,7 +796,7 @@ Returns a new instance of DhcpServer
 </div>
 
     <div id="footer">
-  Generated on Mon Jan 13 15:42:22 2014 by
+  Generated on Mon Jan 13 16:56:10 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-1.8.7).
 </div>

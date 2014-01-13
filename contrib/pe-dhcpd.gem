@@ -1,0 +1,9 @@
+source 'https://rubygems.org'
+
+gem 'rake'
+gem 'log4r'
+gem 'daemons'
+gem 'net-dhcp'
+gem 'pe-dhcpd'
+
+# add your gems here
