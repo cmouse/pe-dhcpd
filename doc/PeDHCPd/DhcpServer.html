@@ -199,8 +199,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>A new instance of DhcpServer.</p>
+    <span class="summary_desc"><div class='inline'><p>
+A new instance of DhcpServer.
+</p>
 </div></span>
   
 </li>
@@ -333,8 +334,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns a new instance of DhcpServer</p>
+    <p>
+Returns a new instance of DhcpServer
+</p>
 
 
   </div>
@@ -356,10 +358,11 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 28</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_ip'>ip</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_ip'>ip</span> <span class='op'>=</span> <span class='id identifier rubyid_guess_my_ip'>guess_my_ip</span> <span class='kw'>if</span> <span class='id identifier rubyid_ip'>ip</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-  <span class='ivar'>@ip</span> <span class='op'>=</span> <span class='id identifier rubyid_ip'>ip</span>
-<span class='kw'>end</span></pre>
+<span class='rubyid_def def kw'>def</span> <span class='rubyid_initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='rubyid_ip identifier id'>ip</span><span class='rparen token'>)</span>
+  <span class='rubyid_ip identifier id'>ip</span> <span class='assign token'>=</span> <span class='rubyid_guess_my_ip identifier id'>guess_my_ip</span> <span class='rubyid_if if_mod kw'>if</span> <span class='rubyid_ip identifier id'>ip</span><span class='dot token'>.</span><span class='rubyid_nil? fid id'>nil?</span>
+  <span class='rubyid_@ip ivar id'>@ip</span> <span class='assign token'>=</span> <span class='rubyid_ip identifier id'>ip</span>
+<span class='rubyid_end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -405,20 +408,21 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 105</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_call_hook'>call_hook</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_msg'>msg</span><span class='rparen'>)</span>
-  <span class='const'>HOOKS</span><span class='lbracket'>[</span><span class='id identifier rubyid_type'>type</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_hook'>hook</span><span class='op'>|</span>
-     <span class='kw'>if</span> <span class='id identifier rubyid_hook'>hook</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>==</span> <span class='const'>Class</span> 
-         <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_hook'>hook</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='period'>.</span><span class='id identifier rubyid_process'>process</span><span class='lparen'>(</span><span class='id identifier rubyid_msg'>msg</span><span class='rparen'>)</span>
-     <span class='kw'>elsif</span> <span class='id identifier rubyid_hook'>hook</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>==</span> <span class='const'>Proc</span>
-         <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_hook'>hook</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_msg'>msg</span><span class='rparen'>)</span>
-     <span class='kw'>elsif</span> <span class='id identifier rubyid_hook'>hook</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='symbol'>:process</span>
-         <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id identifier rubyid_hook'>hook</span><span class='period'>.</span><span class='id identifier rubyid_process'>process</span><span class='lparen'>(</span><span class='id identifier rubyid_msg'>msg</span><span class='rparen'>)</span>
-     <span class='kw'>else</span>
-         <span class='id identifier rubyid_log'>log</span><span class='period'>.</span><span class='id identifier rubyid_fatal'>fatal</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_type'>type</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_content'> is not a Class or Hook, nor does it have process(msg)</span><span class='tstring_end'>&quot;</span></span>
-     <span class='kw'>end</span>
-  <span class='kw'>end</span>
-  <span class='kw'>true</span>
-<span class='kw'>end</span></pre>
+<span class='rubyid_def def kw'>def</span> <span class='rubyid_call_hook identifier id'>call_hook</span><span class='lparen token'>(</span><span class='rubyid_type identifier id'>type</span><span class='comma token'>,</span> <span class='rubyid_msg identifier id'>msg</span><span class='rparen token'>)</span>
+  <span class='rubyid_HOOKS constant id'>HOOKS</span><span class='lbrack token'>[</span><span class='rubyid_type identifier id'>type</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='rubyid_each identifier id'>each</span> <span class='rubyid_do do kw'>do</span> <span class='bitor op'>|</span><span class='rubyid_hook identifier id'>hook</span><span class='bitor op'>|</span>
+     <span class='rubyid_if if kw'>if</span> <span class='rubyid_hook identifier id'>hook</span><span class='dot token'>.</span><span class='rubyid_class identifier id'>class</span> <span class='eq op'>==</span> <span class='rubyid_Class constant id'>Class</span> 
+         <span class='rubyid_return return kw'>return</span> <span class='rubyid_false false kw'>false</span> <span class='rubyid_unless unless_mod kw'>unless</span> <span class='rubyid_hook identifier id'>hook</span><span class='dot token'>.</span><span class='rubyid_new identifier id'>new</span><span class='dot token'>.</span><span class='rubyid_process identifier id'>process</span><span class='lparen token'>(</span><span class='rubyid_msg identifier id'>msg</span><span class='rparen token'>)</span>
+     <span class='rubyid_elsif elsif kw'>elsif</span> <span class='rubyid_hook identifier id'>hook</span><span class='dot token'>.</span><span class='rubyid_class identifier id'>class</span> <span class='eq op'>==</span> <span class='rubyid_Proc constant id'>Proc</span>
+         <span class='rubyid_return return kw'>return</span> <span class='rubyid_false false kw'>false</span> <span class='rubyid_unless unless_mod kw'>unless</span> <span class='rubyid_hook identifier id'>hook</span><span class='dot token'>.</span><span class='rubyid_call identifier id'>call</span><span class='lparen token'>(</span><span class='rubyid_msg identifier id'>msg</span><span class='rparen token'>)</span>
+     <span class='rubyid_elsif elsif kw'>elsif</span> <span class='rubyid_hook identifier id'>hook</span><span class='dot token'>.</span><span class='rubyid_respond_to? fid id'>respond_to?</span> <span class='symbol val'>:process</span>
+         <span class='rubyid_return return kw'>return</span> <span class='rubyid_false false kw'>false</span> <span class='rubyid_unless unless_mod kw'>unless</span> <span class='rubyid_hook identifier id'>hook</span><span class='dot token'>.</span><span class='rubyid_process identifier id'>process</span><span class='lparen token'>(</span><span class='rubyid_msg identifier id'>msg</span><span class='rparen token'>)</span>
+     <span class='rubyid_else else kw'>else</span>
+         <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_fatal identifier id'>fatal</span> <span class='dstring node'>&quot;#{type.class} is not a Class or Hook, nor does it have process(msg)&quot;</span>
+     <span class='rubyid_end end kw'>end</span>
+  <span class='rubyid_end end kw'>end</span>
+  <span class='rubyid_true true kw'>true</span>
+<span class='rubyid_end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -452,15 +456,16 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 80</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_giaddr2yiaddr'>giaddr2yiaddr</span><span class='lparen'>(</span><span class='id identifier rubyid_addr'>addr</span><span class='comma'>,</span> <span class='id identifier rubyid_mask'>mask</span><span class='rparen'>)</span>
-  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_addr'>addr</span><span class='period'>.</span><span class='id identifier rubyid_odd?'>odd?</span> <span class='kw'>and</span> <span class='id identifier rubyid_mask'>mask</span><span class='period'>.</span><span class='id identifier rubyid_to_bits'>to_bits</span> <span class='op'>==</span> <span class='int'>30</span><span class='rparen'>)</span> <span class='kw'>or</span> <span class='lparen'>(</span><span class='kw'>not</span> <span class='id identifier rubyid_addr'>addr</span><span class='period'>.</span><span class='id identifier rubyid_odd?'>odd?</span> <span class='kw'>and</span> <span class='id identifier rubyid_mask'>mask</span><span class='period'>.</span><span class='id identifier rubyid_to_bits'>to_bits</span> <span class='op'>==</span> <span class='int'>31</span><span class='rparen'>)</span>
-    <span class='id identifier rubyid_addr'>addr</span> <span class='op'>+=</span> <span class='int'>1</span>
-  <span class='kw'>elsif</span> <span class='lbracket'>[</span><span class='int'>31</span><span class='comma'>,</span> <span class='int'>30</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_mask'>mask</span><span class='period'>.</span><span class='id identifier rubyid_to_bits'>to_bits</span>
-    <span class='id identifier rubyid_addr'>addr</span> <span class='op'>-=</span> <span class='int'>1</span>
-  <span class='kw'>else</span>
-    <span class='id identifier rubyid_addr'>addr</span> <span class='op'>+=</span> <span class='const'>YIADDR_POLICY</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
+<span class='rubyid_def def kw'>def</span> <span class='rubyid_giaddr2yiaddr identifier id'>giaddr2yiaddr</span><span class='lparen token'>(</span><span class='rubyid_addr identifier id'>addr</span><span class='comma token'>,</span> <span class='rubyid_mask identifier id'>mask</span><span class='rparen token'>)</span>
+  <span class='rubyid_if if kw'>if</span> <span class='lparen token'>(</span><span class='rubyid_addr identifier id'>addr</span><span class='dot token'>.</span><span class='rubyid_odd? fid id'>odd?</span> <span class='rubyid_and and kw'>and</span> <span class='rubyid_mask identifier id'>mask</span><span class='dot token'>.</span><span class='rubyid_to_bits identifier id'>to_bits</span> <span class='eq op'>==</span> <span class='integer val'>30</span><span class='rparen token'>)</span> <span class='rubyid_or or kw'>or</span> <span class='lparen token'>(</span><span class='rubyid_not not kw'>not</span> <span class='rubyid_addr identifier id'>addr</span><span class='dot token'>.</span><span class='rubyid_odd? fid id'>odd?</span> <span class='rubyid_and and kw'>and</span> <span class='rubyid_mask identifier id'>mask</span><span class='dot token'>.</span><span class='rubyid_to_bits identifier id'>to_bits</span> <span class='eq op'>==</span> <span class='integer val'>31</span><span class='rparen token'>)</span>
+    <span class='rubyid_addr identifier id'>addr</span> <span class='opasgn op'>+=</span> <span class='integer val'>1</span>
+  <span class='rubyid_elsif elsif kw'>elsif</span> <span class='lbrack token'>[</span><span class='integer val'>31</span><span class='comma token'>,</span> <span class='integer val'>30</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='rubyid_include? fid id'>include?</span> <span class='rubyid_mask identifier id'>mask</span><span class='dot token'>.</span><span class='rubyid_to_bits identifier id'>to_bits</span>
+    <span class='rubyid_addr identifier id'>addr</span> <span class='opasgn op'>-=</span> <span class='integer val'>1</span>
+  <span class='rubyid_else else kw'>else</span>
+    <span class='rubyid_addr identifier id'>addr</span> <span class='opasgn op'>+=</span> <span class='rubyid_YIADDR_POLICY constant id'>YIADDR_POLICY</span>
+  <span class='rubyid_end end kw'>end</span>
+<span class='rubyid_end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -488,9 +493,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 33</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_guess_my_ip'>guess_my_ip</span>
-  <span class='const'>UDPSocket</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_s'>s</span><span class='op'>|</span> <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_connect'>connect</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>8.8.8.8</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='int'>1</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='id identifier rubyid_s'>s</span><span class='period'>.</span><span class='id identifier rubyid_addr'>addr</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span> <span class='rbrace'>}</span>
-<span class='kw'>end</span></pre>
+<span class='rubyid_def def kw'>def</span> <span class='rubyid_guess_my_ip identifier id'>guess_my_ip</span>
+  <span class='rubyid_UDPSocket constant id'>UDPSocket</span><span class='dot token'>.</span><span class='rubyid_open identifier id'>open</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='rubyid_s identifier id'>s</span><span class='bitor op'>|</span> <span class='rubyid_s identifier id'>s</span><span class='dot token'>.</span><span class='rubyid_connect identifier id'>connect</span><span class='lparen token'>(</span><span class='string val'>&quot;8.8.8.8&quot;</span><span class='comma token'>,</span> <span class='integer val'>1</span><span class='rparen token'>)</span><span class='semicolon token'>;</span> <span class='rubyid_s identifier id'>s</span><span class='dot token'>.</span><span class='rubyid_addr identifier id'>addr</span><span class='dot token'>.</span><span class='rubyid_last identifier id'>last</span> <span class='rbrace token'>}</span>
+<span class='rubyid_end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -518,9 +524,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 24</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_log'>log</span>
-  <span class='ivar'>@log</span>
-<span class='kw'>end</span></pre>
+<span class='rubyid_def def kw'>def</span> <span class='rubyid_log identifier id'>log</span>
+  <span class='rubyid_@log ivar id'>@log</span>
+<span class='rubyid_end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -548,9 +555,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 20</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_log='>log=</span><span class='lparen'>(</span><span class='id identifier rubyid_log'>log</span><span class='rparen'>)</span>
-  <span class='ivar'>@log</span> <span class='op'>=</span> <span class='id identifier rubyid_log'>log</span>
-<span class='kw'>end</span></pre>
+<span class='rubyid_def def kw'>def</span> <span class='rubyid_log= identifier id'>log=</span><span class='lparen token'>(</span><span class='rubyid_log identifier id'>log</span><span class='rparen token'>)</span>
+  <span class='rubyid_@log ivar id'>@log</span> <span class='assign token'>=</span> <span class='rubyid_log identifier id'>log</span>
+<span class='rubyid_end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -588,19 +596,20 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 91</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_request2reply'>request2reply</span><span class='lparen'>(</span><span class='id identifier rubyid_msg'>msg</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_flags'>flags</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_reply'>reply</span> <span class='op'>=</span> <span class='id identifier rubyid_msg'>msg</span><span class='period'>.</span><span class='id identifier rubyid_clone'>clone</span>
-  <span class='id identifier rubyid_reply'>reply</span><span class='period'>.</span><span class='id identifier rubyid_op'>op</span> <span class='op'>=</span> <span class='const'>BootPacket</span><span class='op'>::</span><span class='const'>REPLY</span>
-  <span class='id identifier rubyid_reply'>reply</span><span class='period'>.</span><span class='id identifier rubyid_flags'>flags</span> <span class='op'>=</span> <span class='id identifier rubyid_flags'>flags</span>
-  <span class='id identifier rubyid_reply'>reply</span> <span class='op'>=</span> <span class='id identifier rubyid_set_options'>set_options</span><span class='lparen'>(</span><span class='id identifier rubyid_reply'>reply</span><span class='rparen'>)</span>
-  <span class='kw'>if</span> <span class='const'>YIADDR_POLICY_30_OR_31_MASK</span>
-    <span class='id identifier rubyid_reply'>reply</span><span class='period'>.</span><span class='id identifier rubyid_yiaddr'>yiaddr</span> <span class='op'>=</span> <span class='id identifier rubyid_reply'>reply</span><span class='period'>.</span><span class='id identifier rubyid_giaddr'>giaddr</span> <span class='op'>+</span> <span class='int'>1</span>
-  <span class='kw'>else</span>
-    <span class='id identifier rubyid_reply'>reply</span><span class='period'>.</span><span class='id identifier rubyid_yiaddr'>yiaddr</span> <span class='op'>=</span> <span class='id identifier rubyid_giaddr2yiaddr'>giaddr2yiaddr</span><span class='lparen'>(</span><span class='id identifier rubyid_reply'>reply</span><span class='period'>.</span><span class='id identifier rubyid_giaddr'>giaddr</span><span class='comma'>,</span> <span class='id identifier rubyid_reply'>reply</span><span class='period'>.</span><span class='id identifier rubyid_get_option'>get_option</span><span class='lparen'>(</span><span class='int'>1</span><span class='rparen'>)</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-  <span class='id identifier rubyid_reply'>reply</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='id identifier rubyid_type'>type</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_reply'>reply</span>
-<span class='kw'>end</span></pre>
+<span class='rubyid_def def kw'>def</span> <span class='rubyid_request2reply identifier id'>request2reply</span><span class='lparen token'>(</span><span class='rubyid_msg identifier id'>msg</span><span class='comma token'>,</span> <span class='rubyid_type identifier id'>type</span><span class='comma token'>,</span> <span class='rubyid_flags identifier id'>flags</span><span class='rparen token'>)</span>
+  <span class='rubyid_reply identifier id'>reply</span> <span class='assign token'>=</span> <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_clone identifier id'>clone</span>
+  <span class='rubyid_reply identifier id'>reply</span><span class='dot token'>.</span><span class='rubyid_op identifier id'>op</span> <span class='assign token'>=</span> <span class='rubyid_BootPacket constant id'>BootPacket</span><span class='colon2 op'>::</span><span class='rubyid_REPLY constant id'>REPLY</span>
+  <span class='rubyid_reply identifier id'>reply</span><span class='dot token'>.</span><span class='rubyid_flags identifier id'>flags</span> <span class='assign token'>=</span> <span class='rubyid_flags identifier id'>flags</span>
+  <span class='rubyid_reply identifier id'>reply</span> <span class='assign token'>=</span> <span class='rubyid_set_options identifier id'>set_options</span><span class='lparen token'>(</span><span class='rubyid_reply identifier id'>reply</span><span class='rparen token'>)</span>
+  <span class='rubyid_if if kw'>if</span> <span class='rubyid_YIADDR_POLICY_30_OR_31_MASK constant id'>YIADDR_POLICY_30_OR_31_MASK</span>
+    <span class='rubyid_reply identifier id'>reply</span><span class='dot token'>.</span><span class='rubyid_yiaddr identifier id'>yiaddr</span> <span class='assign token'>=</span> <span class='rubyid_reply identifier id'>reply</span><span class='dot token'>.</span><span class='rubyid_giaddr identifier id'>giaddr</span> <span class='plus op'>+</span> <span class='integer val'>1</span>
+  <span class='rubyid_else else kw'>else</span>
+    <span class='rubyid_reply identifier id'>reply</span><span class='dot token'>.</span><span class='rubyid_yiaddr identifier id'>yiaddr</span> <span class='assign token'>=</span> <span class='rubyid_giaddr2yiaddr identifier id'>giaddr2yiaddr</span><span class='lparen token'>(</span><span class='rubyid_reply identifier id'>reply</span><span class='dot token'>.</span><span class='rubyid_giaddr identifier id'>giaddr</span><span class='comma token'>,</span> <span class='rubyid_reply identifier id'>reply</span><span class='dot token'>.</span><span class='rubyid_get_option identifier id'>get_option</span><span class='lparen token'>(</span><span class='integer val'>1</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+  <span class='rubyid_end end kw'>end</span>
+  <span class='rubyid_reply identifier id'>reply</span><span class='dot token'>.</span><span class='rubyid_type identifier id'>type</span> <span class='assign token'>=</span> <span class='rubyid_type identifier id'>type</span>
+  <span class='rubyid_return return kw'>return</span> <span class='rubyid_reply identifier id'>reply</span>
+<span class='rubyid_end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -699,80 +708,81 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 120</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_run'>run</span>
-  <span class='id identifier rubyid_log'>log</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TDC DHCP started - Binding to </span><span class='embexpr_beg'>#{</span><span class='ivar'>@ip</span><span class='embexpr_end'>}</span><span class='tstring_content'>:67</span><span class='tstring_end'>&quot;</span></span>
+<span class='rubyid_def def kw'>def</span> <span class='rubyid_run identifier id'>run</span>
+  <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_info identifier id'>info</span> <span class='dstring node'>&quot;TDC DHCP started - Binding to #{@ip}:67&quot;</span>
   
-   <span class='comment'># socket code
-</span>  <span class='const'>BasicSocket</span><span class='period'>.</span><span class='id identifier rubyid_do_not_reverse_lookup'>do_not_reverse_lookup</span> <span class='op'>=</span> <span class='kw'>true</span>
-  <span class='ivar'>@socket</span> <span class='op'>=</span> <span class='const'>UDPSocket</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-  <span class='ivar'>@socket</span><span class='period'>.</span><span class='id identifier rubyid_setsockopt'>setsockopt</span><span class='lparen'>(</span><span class='const'>Socket</span><span class='op'>::</span><span class='const'>SOL_SOCKET</span><span class='comma'>,</span> <span class='const'>Socket</span><span class='op'>::</span><span class='const'>SO_REUSEADDR</span><span class='comma'>,</span> <span class='int'>1</span><span class='rparen'>)</span>
-  <span class='ivar'>@socket</span><span class='period'>.</span><span class='id identifier rubyid_bind'>bind</span><span class='lparen'>(</span><span class='ivar'>@ip</span><span class='comma'>,</span> <span class='int'>67</span><span class='rparen'>)</span>
+   <span class='comment val'># socket code</span>
+  <span class='rubyid_BasicSocket constant id'>BasicSocket</span><span class='dot token'>.</span><span class='rubyid_do_not_reverse_lookup identifier id'>do_not_reverse_lookup</span> <span class='assign token'>=</span> <span class='rubyid_true true kw'>true</span>
+  <span class='rubyid_@socket ivar id'>@socket</span> <span class='assign token'>=</span> <span class='rubyid_UDPSocket constant id'>UDPSocket</span><span class='dot token'>.</span><span class='rubyid_new identifier id'>new</span>
+  <span class='rubyid_@socket ivar id'>@socket</span><span class='dot token'>.</span><span class='rubyid_setsockopt identifier id'>setsockopt</span><span class='lparen token'>(</span><span class='rubyid_Socket constant id'>Socket</span><span class='colon2 op'>::</span><span class='rubyid_SOL_SOCKET constant id'>SOL_SOCKET</span><span class='comma token'>,</span> <span class='rubyid_Socket constant id'>Socket</span><span class='colon2 op'>::</span><span class='rubyid_SO_REUSEADDR constant id'>SO_REUSEADDR</span><span class='comma token'>,</span> <span class='integer val'>1</span><span class='rparen token'>)</span>
+  <span class='rubyid_@socket ivar id'>@socket</span><span class='dot token'>.</span><span class='rubyid_bind identifier id'>bind</span><span class='lparen token'>(</span><span class='rubyid_@ip ivar id'>@ip</span><span class='comma token'>,</span> <span class='integer val'>67</span><span class='rparen token'>)</span>
   
-  <span class='comment'># drop privs
-</span>  <span class='const'>Process</span><span class='op'>::</span><span class='const'>Sys</span><span class='period'>.</span><span class='id identifier rubyid_setresgid'>setresgid</span><span class='lparen'>(</span><span class='int'>99</span><span class='comma'>,</span><span class='int'>99</span><span class='comma'>,</span><span class='int'>99</span><span class='rparen'>)</span>
-  <span class='const'>Process</span><span class='op'>::</span><span class='const'>Sys</span><span class='period'>.</span><span class='id identifier rubyid_setresuid'>setresuid</span><span class='lparen'>(</span><span class='int'>99</span><span class='comma'>,</span><span class='int'>99</span><span class='comma'>,</span><span class='int'>99</span><span class='rparen'>)</span>
+  <span class='comment val'># drop privs</span>
+  <span class='rubyid_Process constant id'>Process</span><span class='colon2 op'>::</span><span class='rubyid_Sys constant id'>Sys</span><span class='dot token'>.</span><span class='rubyid_setresgid identifier id'>setresgid</span><span class='lparen token'>(</span><span class='integer val'>99</span><span class='comma token'>,</span><span class='integer val'>99</span><span class='comma token'>,</span><span class='integer val'>99</span><span class='rparen token'>)</span>
+  <span class='rubyid_Process constant id'>Process</span><span class='colon2 op'>::</span><span class='rubyid_Sys constant id'>Sys</span><span class='dot token'>.</span><span class='rubyid_setresuid identifier id'>setresuid</span><span class='lparen token'>(</span><span class='integer val'>99</span><span class='comma token'>,</span><span class='integer val'>99</span><span class='comma token'>,</span><span class='integer val'>99</span><span class='rparen token'>)</span>
   
-  <span class='comment'># generate MacFilter
-</span>  <span class='id identifier rubyid_filter'>filter</span> <span class='op'>=</span> <span class='const'>MacFilterList</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-  <span class='const'>BLACKLIST_MACS</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_mac'>mac</span><span class='op'>|</span>
-    <span class='id identifier rubyid_filter'>filter</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_mac'>mac</span>
-  <span class='kw'>end</span> 
+  <span class='comment val'># generate MacFilter</span>
+  <span class='rubyid_filter identifier id'>filter</span> <span class='assign token'>=</span> <span class='rubyid_MacFilterList constant id'>MacFilterList</span><span class='dot token'>.</span><span class='rubyid_new identifier id'>new</span>
+  <span class='rubyid_BLACKLIST_MACS constant id'>BLACKLIST_MACS</span><span class='dot token'>.</span><span class='rubyid_each identifier id'>each</span> <span class='rubyid_do do kw'>do</span> <span class='bitor op'>|</span><span class='rubyid_mac identifier id'>mac</span><span class='bitor op'>|</span>
+    <span class='rubyid_filter identifier id'>filter</span> <span class='lshft op'>&lt;&lt;</span> <span class='rubyid_mac identifier id'>mac</span>
+  <span class='rubyid_end end kw'>end</span> 
   
-  <span class='id identifier rubyid_loop'>loop</span> <span class='kw'>do</span> 
-    <span class='id identifier rubyid_read_array'>read_array</span> <span class='op'>=</span> <span class='const'>Kernel</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbracket'>[</span><span class='ivar'>@socket</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='int'>10</span>
-    <span class='kw'>unless</span> <span class='id identifier rubyid_read_array'>read_array</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
-       <span class='comment'># process message
-</span>       <span class='kw'>begin</span>
-          <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='id identifier rubyid_addr'>addr</span> <span class='op'>=</span> <span class='ivar'>@socket</span><span class='period'>.</span><span class='id identifier rubyid_recvfrom'>recvfrom</span><span class='lparen'>(</span><span class='int'>1500</span><span class='rparen'>)</span>
-          <span class='id identifier rubyid_imsg'>imsg</span> <span class='op'>=</span> <span class='const'>BootPacket</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
-       <span class='kw'>rescue</span> <span class='const'>Exception</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
-          <span class='id identifier rubyid_log'>log</span><span class='period'>.</span><span class='id identifier rubyid_error'>error</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Processing error: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='embexpr_end'>}</span><span class='tstring_content'>\n</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_backtrace'>backtrace</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-          <span class='id identifier rubyid_log'>log</span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Dumping message packet for debug</span><span class='tstring_end'>&quot;</span></span>
-          <span class='id identifier rubyid_str'>str</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_bytes'>bytes</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_c'>c</span><span class='op'>|</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%02x</span><span class='tstring_end'>&quot;</span></span> <span class='op'>%</span> <span class='lbracket'>[</span><span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rbracket'>]</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='semicolon'>;</span>
-          <span class='id identifier rubyid_log'>log</span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span> <span class='id identifier rubyid_str'>str</span>
-          <span class='kw'>next</span>
-       <span class='kw'>end</span>
+  <span class='rubyid_loop identifier id'>loop</span> <span class='rubyid_do do kw'>do</span> 
+    <span class='rubyid_read_array identifier id'>read_array</span> <span class='assign token'>=</span> <span class='rubyid_Kernel constant id'>Kernel</span><span class='dot token'>.</span><span class='rubyid_select identifier id'>select</span> <span class='lbrack token'>[</span><span class='rubyid_@socket ivar id'>@socket</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='rubyid_nil nil kw'>nil</span><span class='comma token'>,</span> <span class='rubyid_nil nil kw'>nil</span><span class='comma token'>,</span> <span class='integer val'>10</span>
+    <span class='rubyid_unless unless kw'>unless</span> <span class='rubyid_read_array identifier id'>read_array</span><span class='dot token'>.</span><span class='rubyid_nil? fid id'>nil?</span> 
+       <span class='comment val'># process message</span>
+       <span class='rubyid_begin begin kw'>begin</span>
+          <span class='rubyid_data identifier id'>data</span><span class='comma token'>,</span> <span class='rubyid_addr identifier id'>addr</span> <span class='assign token'>=</span> <span class='rubyid_@socket ivar id'>@socket</span><span class='dot token'>.</span><span class='rubyid_recvfrom identifier id'>recvfrom</span><span class='lparen token'>(</span><span class='integer val'>1500</span><span class='rparen token'>)</span>
+          <span class='rubyid_imsg identifier id'>imsg</span> <span class='assign token'>=</span> <span class='rubyid_BootPacket constant id'>BootPacket</span><span class='dot token'>.</span><span class='rubyid_new identifier id'>new</span><span class='lparen token'>(</span><span class='rubyid_data identifier id'>data</span><span class='rparen token'>)</span>
+       <span class='rubyid_rescue rescue kw'>rescue</span> <span class='rubyid_Exception constant id'>Exception</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='rubyid_e identifier id'>e</span>
+          <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_error identifier id'>error</span> <span class='dstring node'>&quot;Processing error: #{e}\n#{e.backtrace.join(&quot;\n&quot;)}&quot;</span>
+          <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='string val'>&quot;Dumping message packet for debug&quot;</span>
+          <span class='rubyid_str identifier id'>str</span> <span class='assign token'>=</span> <span class='rubyid_data identifier id'>data</span><span class='dot token'>.</span><span class='rubyid_bytes identifier id'>bytes</span><span class='dot token'>.</span><span class='rubyid_map identifier id'>map</span> <span class='lbrace token'>{</span> <span class='bitor op'>|</span><span class='rubyid_c identifier id'>c</span><span class='bitor op'>|</span> <span class='string val'>&quot;%02x&quot;</span> <span class='mod op'>%</span> <span class='lbrack token'>[</span><span class='rubyid_c identifier id'>c</span><span class='dot token'>.</span><span class='rubyid_to_i identifier id'>to_i</span><span class='rbrack token'>]</span> <span class='rbrace token'>}</span><span class='dot token'>.</span><span class='rubyid_join identifier id'>join</span><span class='lparen token'>(</span><span class='string val'>' '</span><span class='rparen token'>)</span><span class='semicolon token'>;</span>
+          <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='rubyid_str identifier id'>str</span>
+          <span class='rubyid_next next kw'>next</span>
+       <span class='rubyid_end end kw'>end</span>
   
-       <span class='kw'>if</span> <span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_valid?'>valid?</span> <span class='op'>==</span> <span class='kw'>false</span>
-         <span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='const'>MessageTypeOption</span><span class='op'>::</span><span class='const'>REQUEST</span>
-       <span class='kw'>end</span>
+       <span class='rubyid_if if kw'>if</span> <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_valid? fid id'>valid?</span> <span class='eq op'>==</span> <span class='rubyid_false false kw'>false</span>
+         <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_type identifier id'>type</span> <span class='assign token'>=</span> <span class='rubyid_MessageTypeOption constant id'>MessageTypeOption</span><span class='colon2 op'>::</span><span class='rubyid_REQUEST constant id'>REQUEST</span>
+       <span class='rubyid_end end kw'>end</span>
   
-       <span class='kw'>if</span> <span class='id identifier rubyid_filter'>filter</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_chaddr'>chaddr</span> 
-         <span class='id identifier rubyid_log'>log</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Ignoring DHCP from </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_chaddr_s'>chaddr_s</span><span class='embexpr_end'>}</span><span class='tstring_content'> due to blacklist</span><span class='tstring_end'>&quot;</span></span>
-         <span class='kw'>next</span>
-       <span class='kw'>end</span>
+       <span class='rubyid_if if kw'>if</span> <span class='rubyid_filter identifier id'>filter</span><span class='dot token'>.</span><span class='rubyid_include? fid id'>include?</span> <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_chaddr identifier id'>chaddr</span> 
+         <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_info identifier id'>info</span> <span class='dstring node'>&quot;Ignoring DHCP from #{imsg.chaddr_s} due to blacklist&quot;</span>
+         <span class='rubyid_next next kw'>next</span>
+       <span class='rubyid_end end kw'>end</span>
   
-       <span class='id identifier rubyid_log'>log</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Received </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span><span class='period'>.</span><span class='id identifier rubyid_type_s'>type_s</span><span class='embexpr_end'>}</span><span class='tstring_content'> from </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_ciaddr_s'>ciaddr_s</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_chaddr_s'>chaddr_s</span><span class='embexpr_end'>}</span><span class='tstring_content'> via </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_giaddr_s'>giaddr_s</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-       <span class='id identifier rubyid_log'>log</span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span> <span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+       <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_info identifier id'>info</span> <span class='dstring node'>&quot;Received #{imsg.type.type_s} from #{imsg.ciaddr_s} #{imsg.chaddr_s} via #{imsg.giaddr_s}&quot;</span>
+       <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_to_s identifier id'>to_s</span>
   
-       <span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_giaddr'>giaddr</span> <span class='op'>=</span> <span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_ciaddr'>ciaddr</span><span class='op'>-</span><span class='int'>1</span> <span class='kw'>if</span> <span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_giaddr'>giaddr</span> <span class='op'>==</span> <span class='int'>0</span> <span class='kw'>and</span> <span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_ciaddr'>ciaddr</span> <span class='op'>!=</span> <span class='int'>0</span>
+       <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_giaddr identifier id'>giaddr</span> <span class='assign token'>=</span> <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_ciaddr identifier id'>ciaddr</span><span class='minus op'>-</span><span class='integer val'>1</span> <span class='rubyid_if if_mod kw'>if</span> <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_giaddr identifier id'>giaddr</span> <span class='eq op'>==</span> <span class='integer val'>0</span> <span class='rubyid_and and kw'>and</span> <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_ciaddr identifier id'>ciaddr</span> <span class='neq op'>!=</span> <span class='integer val'>0</span>
   
-       <span class='kw'>if</span> <span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_giaddr'>giaddr</span> <span class='op'>==</span> <span class='int'>0</span> 
-         <span class='id identifier rubyid_log'>log</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Cannot handle packet with no giaddr</span><span class='tstring_end'>&quot;</span></span>
-         <span class='kw'>next</span>
-       <span class='kw'>end</span>
+       <span class='rubyid_if if kw'>if</span> <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_giaddr identifier id'>giaddr</span> <span class='eq op'>==</span> <span class='integer val'>0</span> 
+         <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_info identifier id'>info</span> <span class='string val'>&quot;Cannot handle packet with no giaddr&quot;</span>
+         <span class='rubyid_next next kw'>next</span>
+       <span class='rubyid_end end kw'>end</span>
   
-       <span class='kw'>case</span> <span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span>
-          <span class='kw'>when</span> <span class='const'>MessageTypeOption</span><span class='op'>::</span><span class='const'>DISCOVER</span>
-            <span class='kw'>next</span> <span class='kw'>unless</span> <span class='id identifier rubyid_call_hook'>call_hook</span><span class='lparen'>(</span><span class='symbol'>:discover</span><span class='comma'>,</span> <span class='id identifier rubyid_imsg'>imsg</span><span class='rparen'>)</span>
-            <span class='id identifier rubyid_omsg'>omsg</span> <span class='op'>=</span> <span class='id identifier rubyid_request2reply'>request2reply</span><span class='lparen'>(</span><span class='id identifier rubyid_imsg'>imsg</span><span class='comma'>,</span> <span class='const'>MessageTypeOption</span><span class='op'>::</span><span class='const'>OFFER</span><span class='comma'>,</span> <span class='int'>0x8000</span><span class='rparen'>)</span>
-            <span class='kw'>next</span> <span class='kw'>unless</span> <span class='id identifier rubyid_call_hook'>call_hook</span><span class='lparen'>(</span><span class='symbol'>:offer</span><span class='comma'>,</span> <span class='id identifier rubyid_omsg'>omsg</span><span class='rparen'>)</span>
-          <span class='kw'>when</span> <span class='const'>MessageTypeOption</span><span class='op'>::</span><span class='const'>REQUEST</span>
-            <span class='kw'>next</span> <span class='kw'>unless</span> <span class='id identifier rubyid_call_hook'>call_hook</span><span class='lparen'>(</span><span class='symbol'>:request</span><span class='comma'>,</span> <span class='id identifier rubyid_imsg'>imsg</span><span class='rparen'>)</span>
-            <span class='id identifier rubyid_omsg'>omsg</span> <span class='op'>=</span> <span class='id identifier rubyid_request2reply'>request2reply</span><span class='lparen'>(</span><span class='id identifier rubyid_imsg'>imsg</span><span class='comma'>,</span> <span class='const'>MessageTypeOption</span><span class='op'>::</span><span class='const'>ACK</span><span class='comma'>,</span> <span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_flags'>flags</span><span class='rparen'>)</span>
-            <span class='kw'>next</span> <span class='kw'>unless</span> <span class='id identifier rubyid_call_hook'>call_hook</span><span class='lparen'>(</span><span class='symbol'>:acknowledge</span><span class='comma'>,</span> <span class='id identifier rubyid_omsg'>omsg</span><span class='rparen'>)</span>
-          <span class='kw'>else</span>
-            <span class='kw'>next</span>
-       <span class='kw'>end</span>
+       <span class='rubyid_case case kw'>case</span> <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_type identifier id'>type</span><span class='dot token'>.</span><span class='rubyid_type identifier id'>type</span>
+          <span class='rubyid_when when kw'>when</span> <span class='rubyid_MessageTypeOption constant id'>MessageTypeOption</span><span class='colon2 op'>::</span><span class='rubyid_DISCOVER constant id'>DISCOVER</span>
+            <span class='rubyid_next next kw'>next</span> <span class='rubyid_unless unless_mod kw'>unless</span> <span class='rubyid_call_hook identifier id'>call_hook</span><span class='lparen token'>(</span><span class='symbol val'>:discover</span><span class='comma token'>,</span> <span class='rubyid_imsg identifier id'>imsg</span><span class='rparen token'>)</span>
+            <span class='rubyid_omsg identifier id'>omsg</span> <span class='assign token'>=</span> <span class='rubyid_request2reply identifier id'>request2reply</span><span class='lparen token'>(</span><span class='rubyid_imsg identifier id'>imsg</span><span class='comma token'>,</span> <span class='rubyid_MessageTypeOption constant id'>MessageTypeOption</span><span class='colon2 op'>::</span><span class='rubyid_OFFER constant id'>OFFER</span><span class='comma token'>,</span> <span class='integer val'>0x8000</span><span class='rparen token'>)</span>
+            <span class='rubyid_next next kw'>next</span> <span class='rubyid_unless unless_mod kw'>unless</span> <span class='rubyid_call_hook identifier id'>call_hook</span><span class='lparen token'>(</span><span class='symbol val'>:offer</span><span class='comma token'>,</span> <span class='rubyid_omsg identifier id'>omsg</span><span class='rparen token'>)</span>
+          <span class='rubyid_when when kw'>when</span> <span class='rubyid_MessageTypeOption constant id'>MessageTypeOption</span><span class='colon2 op'>::</span><span class='rubyid_REQUEST constant id'>REQUEST</span>
+            <span class='rubyid_next next kw'>next</span> <span class='rubyid_unless unless_mod kw'>unless</span> <span class='rubyid_call_hook identifier id'>call_hook</span><span class='lparen token'>(</span><span class='symbol val'>:request</span><span class='comma token'>,</span> <span class='rubyid_imsg identifier id'>imsg</span><span class='rparen token'>)</span>
+            <span class='rubyid_omsg identifier id'>omsg</span> <span class='assign token'>=</span> <span class='rubyid_request2reply identifier id'>request2reply</span><span class='lparen token'>(</span><span class='rubyid_imsg identifier id'>imsg</span><span class='comma token'>,</span> <span class='rubyid_MessageTypeOption constant id'>MessageTypeOption</span><span class='colon2 op'>::</span><span class='rubyid_ACK constant id'>ACK</span><span class='comma token'>,</span> <span class='rubyid_imsg identifier id'>imsg</span><span class='dot token'>.</span><span class='rubyid_flags identifier id'>flags</span><span class='rparen token'>)</span>
+            <span class='rubyid_next next kw'>next</span> <span class='rubyid_unless unless_mod kw'>unless</span> <span class='rubyid_call_hook identifier id'>call_hook</span><span class='lparen token'>(</span><span class='symbol val'>:acknowledge</span><span class='comma token'>,</span> <span class='rubyid_omsg identifier id'>omsg</span><span class='rparen token'>)</span>
+          <span class='rubyid_else else kw'>else</span>
+            <span class='rubyid_next next kw'>next</span>
+       <span class='rubyid_end end kw'>end</span>
   
-       <span class='id identifier rubyid_log'>log</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Sending </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_omsg'>omsg</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span><span class='period'>.</span><span class='id identifier rubyid_type_s'>type_s</span><span class='embexpr_end'>}</span><span class='tstring_content'> to </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_yiaddr_s'>yiaddr_s</span><span class='embexpr_end'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_chaddr_s'>chaddr_s</span><span class='embexpr_end'>}</span><span class='tstring_content'> via </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_imsg'>imsg</span><span class='period'>.</span><span class='id identifier rubyid_giaddr_s'>giaddr_s</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-       <span class='id identifier rubyid_log'>log</span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span> <span class='id identifier rubyid_omsg'>omsg</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+       <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_info identifier id'>info</span> <span class='dstring node'>&quot;Sending #{omsg.type.type_s} to #{imsg.yiaddr_s} #{imsg.chaddr_s} via #{imsg.giaddr_s}&quot;</span>
+       <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='rubyid_omsg identifier id'>omsg</span><span class='dot token'>.</span><span class='rubyid_to_s identifier id'>to_s</span>
   
-       <span class='comment'># send the packet back where it came from
-</span>       <span class='ivar'>@socket</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span> <span class='id identifier rubyid_omsg'>omsg</span><span class='period'>.</span><span class='id identifier rubyid_pack'>pack</span><span class='comma'>,</span> <span class='int'>0</span><span class='comma'>,</span> <span class='id identifier rubyid_addr'>addr</span><span class='lbracket'>[</span><span class='int'>3</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_addr'>addr</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>
-    <span class='kw'>end</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
+       <span class='comment val'># send the packet back where it came from</span>
+       <span class='rubyid_@socket ivar id'>@socket</span><span class='dot token'>.</span><span class='rubyid_send identifier id'>send</span> <span class='rubyid_omsg identifier id'>omsg</span><span class='dot token'>.</span><span class='rubyid_pack identifier id'>pack</span><span class='comma token'>,</span> <span class='integer val'>0</span><span class='comma token'>,</span> <span class='rubyid_addr identifier id'>addr</span><span class='lbrack token'>[</span><span class='integer val'>3</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='rubyid_addr identifier id'>addr</span><span class='lbrack token'>[</span><span class='integer val'>1</span><span class='rbrack token'>]</span>
+    <span class='rubyid_end end kw'>end</span>
+  <span class='rubyid_end end kw'>end</span>
+<span class='rubyid_end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -839,48 +849,49 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/pe-dhcpd.rb', line 37</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_set_options'>set_options</span><span class='lparen'>(</span><span class='id identifier rubyid_msg'>msg</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_requested'>requested</span> <span class='op'>=</span> <span class='id identifier rubyid_msg'>msg</span><span class='period'>.</span><span class='id identifier rubyid_get_option'>get_option</span><span class='lparen'>(</span><span class='int'>55</span><span class='rparen'>)</span>
+<span class='rubyid_def def kw'>def</span> <span class='rubyid_set_options identifier id'>set_options</span><span class='lparen token'>(</span><span class='rubyid_msg identifier id'>msg</span><span class='rparen token'>)</span>
+  <span class='rubyid_requested identifier id'>requested</span> <span class='assign token'>=</span> <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_get_option identifier id'>get_option</span><span class='lparen token'>(</span><span class='integer val'>55</span><span class='rparen token'>)</span>
   
-  <span class='comment'># kill parameter request list and requested ip address
-</span>  <span class='id identifier rubyid_msg'>msg</span><span class='period'>.</span><span class='id identifier rubyid_remove_option'>remove_option</span><span class='lparen'>(</span><span class='int'>55</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_msg'>msg</span><span class='period'>.</span><span class='id identifier rubyid_remove_option'>remove_option</span><span class='lparen'>(</span><span class='int'>50</span><span class='rparen'>)</span>
+  <span class='comment val'># kill parameter request list and requested ip address</span>
+  <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_remove_option identifier id'>remove_option</span><span class='lparen token'>(</span><span class='integer val'>55</span><span class='rparen token'>)</span>
+  <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_remove_option identifier id'>remove_option</span><span class='lparen token'>(</span><span class='integer val'>50</span><span class='rparen token'>)</span>
   
-  <span class='comment'># overwrite/add required options
-</span>  <span class='kw'>if</span> <span class='const'>YIADDR_POLICY_30_OR_31_MASK</span>
-     <span class='kw'>if</span> <span class='id identifier rubyid_msg'>msg</span><span class='period'>.</span><span class='id identifier rubyid_giaddr'>giaddr</span><span class='period'>.</span><span class='id identifier rubyid_odd?'>odd?</span>
-        <span class='id identifier rubyid_msg'>msg</span><span class='period'>.</span><span class='id identifier rubyid_set_option'>set_option</span><span class='lparen'>(</span><span class='const'>SubnetMaskOption</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>255.255.255.252</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
-     <span class='kw'>else</span>
-        <span class='id identifier rubyid_msg'>msg</span><span class='period'>.</span><span class='id identifier rubyid_set_option'>set_option</span><span class='lparen'>(</span><span class='const'>SubnetMaskOption</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>255.255.255.254</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
-     <span class='kw'>end</span>
-  <span class='kw'>else</span>
-     <span class='id identifier rubyid_msg'>msg</span><span class='period'>.</span><span class='id identifier rubyid_set_option'>set_option</span><span class='lparen'>(</span><span class='const'>SubnetMaskOption</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>SUBNET_MASK</span><span class='rparen'>)</span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
-  <span class='id identifier rubyid_msg'>msg</span><span class='period'>.</span><span class='id identifier rubyid_set_option'>set_option</span><span class='lparen'>(</span><span class='const'>RouterOption</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>IPAddr</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_msg'>msg</span><span class='period'>.</span><span class='id identifier rubyid_giaddr'>giaddr</span><span class='comma'>,</span> <span class='const'>Socket</span><span class='op'>::</span><span class='const'>AF_INET</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_msg'>msg</span><span class='period'>.</span><span class='id identifier rubyid_set_option'>set_option</span><span class='lparen'>(</span><span class='const'>DomainNameServerOption</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>DNS_SERVERS</span><span class='rparen'>)</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_msg'>msg</span><span class='period'>.</span><span class='id identifier rubyid_set_option'>set_option</span><span class='lparen'>(</span><span class='const'>IPAddressLeaseTimeOption</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>LEASE_TIME</span><span class='rparen'>)</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_msg'>msg</span><span class='period'>.</span><span class='id identifier rubyid_set_option'>set_option</span><span class='lparen'>(</span><span class='const'>NetworkTimeProtocolServersOption</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>NTP_SERVERS</span><span class='rparen'>)</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_msg'>msg</span><span class='period'>.</span><span class='id identifier rubyid_set_option'>set_option</span><span class='lparen'>(</span><span class='const'>RebindingTimeValueOption</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>REBIND_TIME</span><span class='rparen'>)</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_msg'>msg</span><span class='period'>.</span><span class='id identifier rubyid_set_option'>set_option</span><span class='lparen'>(</span><span class='const'>RenewalTimeValueOption</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>RENEWAL_TIME</span><span class='rparen'>)</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_msg'>msg</span><span class='period'>.</span><span class='id identifier rubyid_set_option'>set_option</span><span class='lparen'>(</span><span class='const'>DHCPServerIdentifierOption</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@ip</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='comment val'># overwrite/add required options</span>
+  <span class='rubyid_if if kw'>if</span> <span class='rubyid_YIADDR_POLICY_30_OR_31_MASK constant id'>YIADDR_POLICY_30_OR_31_MASK</span>
+     <span class='rubyid_if if kw'>if</span> <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_giaddr identifier id'>giaddr</span><span class='dot token'>.</span><span class='rubyid_odd? fid id'>odd?</span>
+        <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_set_option identifier id'>set_option</span><span class='lparen token'>(</span><span class='rubyid_SubnetMaskOption constant id'>SubnetMaskOption</span><span class='dot token'>.</span><span class='rubyid_new identifier id'>new</span><span class='lparen token'>(</span><span class='string val'>'255.255.255.252'</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+     <span class='rubyid_else else kw'>else</span>
+        <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_set_option identifier id'>set_option</span><span class='lparen token'>(</span><span class='rubyid_SubnetMaskOption constant id'>SubnetMaskOption</span><span class='dot token'>.</span><span class='rubyid_new identifier id'>new</span><span class='lparen token'>(</span><span class='string val'>'255.255.255.254'</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+     <span class='rubyid_end end kw'>end</span>
+  <span class='rubyid_else else kw'>else</span>
+     <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_set_option identifier id'>set_option</span><span class='lparen token'>(</span><span class='rubyid_SubnetMaskOption constant id'>SubnetMaskOption</span><span class='dot token'>.</span><span class='rubyid_new identifier id'>new</span><span class='lparen token'>(</span><span class='rubyid_SUBNET_MASK constant id'>SUBNET_MASK</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+  <span class='rubyid_end end kw'>end</span>
+  <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_set_option identifier id'>set_option</span><span class='lparen token'>(</span><span class='rubyid_RouterOption constant id'>RouterOption</span><span class='dot token'>.</span><span class='rubyid_new identifier id'>new</span><span class='lparen token'>(</span><span class='rubyid_IPAddr constant id'>IPAddr</span><span class='dot token'>.</span><span class='rubyid_new identifier id'>new</span><span class='lparen token'>(</span><span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_giaddr identifier id'>giaddr</span><span class='comma token'>,</span> <span class='rubyid_Socket constant id'>Socket</span><span class='colon2 op'>::</span><span class='rubyid_AF_INET constant id'>AF_INET</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='rubyid_to_s identifier id'>to_s</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+  <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_set_option identifier id'>set_option</span><span class='lparen token'>(</span><span class='rubyid_DomainNameServerOption constant id'>DomainNameServerOption</span><span class='dot token'>.</span><span class='rubyid_new identifier id'>new</span><span class='lparen token'>(</span><span class='rubyid_DNS_SERVERS constant id'>DNS_SERVERS</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+  <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_set_option identifier id'>set_option</span><span class='lparen token'>(</span><span class='rubyid_IPAddressLeaseTimeOption constant id'>IPAddressLeaseTimeOption</span><span class='dot token'>.</span><span class='rubyid_new identifier id'>new</span><span class='lparen token'>(</span><span class='rubyid_LEASE_TIME constant id'>LEASE_TIME</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+  <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_set_option identifier id'>set_option</span><span class='lparen token'>(</span><span class='rubyid_NetworkTimeProtocolServersOption constant id'>NetworkTimeProtocolServersOption</span><span class='dot token'>.</span><span class='rubyid_new identifier id'>new</span><span class='lparen token'>(</span><span class='rubyid_NTP_SERVERS constant id'>NTP_SERVERS</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+  <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_set_option identifier id'>set_option</span><span class='lparen token'>(</span><span class='rubyid_RebindingTimeValueOption constant id'>RebindingTimeValueOption</span><span class='dot token'>.</span><span class='rubyid_new identifier id'>new</span><span class='lparen token'>(</span><span class='rubyid_REBIND_TIME constant id'>REBIND_TIME</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+  <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_set_option identifier id'>set_option</span><span class='lparen token'>(</span><span class='rubyid_RenewalTimeValueOption constant id'>RenewalTimeValueOption</span><span class='dot token'>.</span><span class='rubyid_new identifier id'>new</span><span class='lparen token'>(</span><span class='rubyid_RENEWAL_TIME constant id'>RENEWAL_TIME</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+  <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_set_option identifier id'>set_option</span><span class='lparen token'>(</span><span class='rubyid_DHCPServerIdentifierOption constant id'>DHCPServerIdentifierOption</span><span class='dot token'>.</span><span class='rubyid_new identifier id'>new</span><span class='lparen token'>(</span><span class='rubyid_@ip ivar id'>@ip</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
   
-  <span class='comment'># kill anything that wasn&#39;t on parameter request list
-</span>  <span class='kw'>unless</span> <span class='id identifier rubyid_requested'>requested</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
-     <span class='id identifier rubyid_new_options'>new_options</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-     <span class='id identifier rubyid_keep'>keep</span> <span class='op'>=</span> <span class='id identifier rubyid_requested'>requested</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span> <span class='op'>+</span> <span class='lbracket'>[</span><span class='int'>51</span><span class='comma'>,</span><span class='int'>53</span><span class='comma'>,</span><span class='int'>54</span><span class='comma'>,</span><span class='int'>60</span><span class='comma'>,</span><span class='int'>61</span><span class='comma'>,</span><span class='int'>82</span><span class='rbracket'>]</span>
-     <span class='id identifier rubyid_msg'>msg</span><span class='period'>.</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_option'>option</span><span class='op'>|</span>
-       <span class='comment'># retain messagetypeoption even if it was not asked for...
-</span>       <span class='kw'>if</span> <span class='id identifier rubyid_keep'>keep</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_option'>option</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> 
-         <span class='id identifier rubyid_new_options'>new_options</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_option'>option</span>
-       <span class='kw'>else</span> 
-         <span class='id identifier rubyid_log'>log</span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Dropping </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_option'>option</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='embexpr_end'>}</span><span class='tstring_content'> as it&#39;s not wanted</span><span class='tstring_end'>&quot;</span></span>
-       <span class='kw'>end</span>
-     <span class='kw'>end</span>
-     <span class='id identifier rubyid_msg'>msg</span><span class='period'>.</span><span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='id identifier rubyid_new_options'>new_options</span>
-  <span class='kw'>end</span>
+  <span class='comment val'># kill anything that wasn't on parameter request list</span>
+  <span class='rubyid_unless unless kw'>unless</span> <span class='rubyid_requested identifier id'>requested</span><span class='dot token'>.</span><span class='rubyid_nil? fid id'>nil?</span>
+     <span class='rubyid_new_options identifier id'>new_options</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span><span class='rbrack token'>]</span>
+     <span class='rubyid_keep identifier id'>keep</span> <span class='assign token'>=</span> <span class='rubyid_requested identifier id'>requested</span><span class='dot token'>.</span><span class='rubyid_get identifier id'>get</span> <span class='plus op'>+</span> <span class='lbrack token'>[</span><span class='integer val'>51</span><span class='comma token'>,</span><span class='integer val'>53</span><span class='comma token'>,</span><span class='integer val'>54</span><span class='comma token'>,</span><span class='integer val'>60</span><span class='comma token'>,</span><span class='integer val'>61</span><span class='comma token'>,</span><span class='integer val'>82</span><span class='rbrack token'>]</span>
+     <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_options identifier id'>options</span><span class='dot token'>.</span><span class='rubyid_each identifier id'>each</span> <span class='rubyid_do do kw'>do</span> <span class='bitor op'>|</span><span class='rubyid_option identifier id'>option</span><span class='bitor op'>|</span>
+       <span class='comment val'># retain messagetypeoption even if it was not asked for...</span>
+       <span class='rubyid_if if kw'>if</span> <span class='rubyid_keep identifier id'>keep</span><span class='dot token'>.</span><span class='rubyid_include? fid id'>include?</span><span class='lparen token'>(</span><span class='rubyid_option identifier id'>option</span><span class='dot token'>.</span><span class='rubyid_key identifier id'>key</span><span class='rparen token'>)</span> 
+         <span class='rubyid_new_options identifier id'>new_options</span> <span class='lshft op'>&lt;&lt;</span> <span class='rubyid_option identifier id'>option</span>
+       <span class='rubyid_else else kw'>else</span> 
+         <span class='rubyid_log identifier id'>log</span><span class='dot token'>.</span><span class='rubyid_debug identifier id'>debug</span> <span class='dstring node'>&quot;Dropping #{option.class} as it's not wanted&quot;</span>
+       <span class='rubyid_end end kw'>end</span>
+     <span class='rubyid_end end kw'>end</span>
+     <span class='rubyid_msg identifier id'>msg</span><span class='dot token'>.</span><span class='rubyid_options identifier id'>options</span> <span class='assign token'>=</span> <span class='rubyid_new_options identifier id'>new_options</span>
+  <span class='rubyid_end end kw'>end</span>
   
-  <span class='kw'>return</span> <span class='id identifier rubyid_msg'>msg</span>
-<span class='kw'>end</span></pre>
+  <span class='rubyid_return return kw'>return</span> <span class='rubyid_msg identifier id'>msg</span>
+<span class='rubyid_end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -891,9 +902,9 @@
 </div>
 
     <div id="footer">
-  Generated on Mon Jan 13 15:21:57 2014 by
+  Generated on Mon Jan 13 15:41:09 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.3 (ruby-2.0.0).
+  0.8.7.3 (ruby-1.8.7).
 </div>
 
   </body>

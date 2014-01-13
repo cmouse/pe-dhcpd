@@ -1,5 +1,16 @@
-Simple DHCP script to provide /31 link networks for CPE's.
+Simple DHCP script to provide /31 link networks for CPE\s.
+==========================================================
 
-For sysv init, you can simply symlink the binary into /etc/init.d, it contains LSB and RedHat stanzas.
+Installation
+------------
+To install, use gem install pe-dhcpd, or rake install
 
-For upstart, you can use upstart.conf.
+Configuration
+-------------
+Look at contrib/pe-dhcpd.conf and use that.
+
+Running
+-------
+Look at contrib/pe-dhcpd.init or contrib/upstart.conf, and use 
+the one that suits your needs. Modify as needed.
+

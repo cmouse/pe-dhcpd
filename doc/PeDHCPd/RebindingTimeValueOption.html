@@ -215,11 +215,12 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/pe-dhcpd/options.rb', line 252</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_build'>build</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
-  <span class='ivar'>@key</span> <span class='op'>=</span> <span class='int'>59</span>
-  <span class='ivar'>@len</span> <span class='op'>=</span> <span class='int'>4</span>
-  <span class='ivar'>@value</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_value'>value</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_pack'>pack</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>N</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
+<span class='rubyid_def def kw'>def</span> <span class='rubyid_build identifier id'>build</span><span class='lparen token'>(</span><span class='rubyid_value identifier id'>value</span><span class='rparen token'>)</span>
+  <span class='rubyid_@key ivar id'>@key</span> <span class='assign token'>=</span> <span class='integer val'>59</span>
+  <span class='rubyid_@len ivar id'>@len</span> <span class='assign token'>=</span> <span class='integer val'>4</span>
+  <span class='rubyid_@value ivar id'>@value</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span><span class='rubyid_value identifier id'>value</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='rubyid_pack identifier id'>pack</span><span class='lparen token'>(</span><span class='string val'>'N'</span><span class='rparen token'>)</span>
+<span class='rubyid_end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -247,9 +248,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/pe-dhcpd/options.rb', line 258</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
-  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Rebinding Time Value = </span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='ivar'>@value</span><span class='period'>.</span><span class='id identifier rubyid_unpack'>unpack</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>N</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> seconds</span><span class='tstring_end'>&quot;</span></span>
-<span class='kw'>end</span></pre>
+<span class='rubyid_def def kw'>def</span> <span class='rubyid_to_s identifier id'>to_s</span>
+  <span class='string val'>&quot;Rebinding Time Value = &quot;</span> <span class='plus op'>+</span> <span class='rubyid_@value ivar id'>@value</span><span class='dot token'>.</span><span class='rubyid_unpack identifier id'>unpack</span><span class='lparen token'>(</span><span class='string val'>'N'</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='rubyid_to_s identifier id'>to_s</span> <span class='plus op'>+</span> <span class='string val'>&quot; seconds&quot;</span>
+<span class='rubyid_end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -260,9 +262,9 @@
 </div>
 
     <div id="footer">
-  Generated on Mon Jan 13 15:21:58 2014 by
+  Generated on Mon Jan 13 15:41:10 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.3 (ruby-2.0.0).
+  0.8.7.3 (ruby-1.8.7).
 </div>
 
   </body>
