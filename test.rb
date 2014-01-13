@@ -14,11 +14,11 @@ include PeDHCPd
 s = UDPSocket.new
 
 p = DHCP::Discover.new
-p.giaddr = IPAddr.new('127.0.0.1').to_i
+p.giaddr = IPAddr.new('195.10.132.203').to_i
 
 puts p
 
-s.send p.pack, 0, '127.0.0.1', 67
+s.send p.pack, 0, '195.10.132.203', 67
 
 d, addr = s.recvfrom(1500)
 
@@ -40,7 +40,7 @@ p.xid = t.xid
 
 puts p
 
-s.send p.pack, 0, '127.0.0.1', 67
+s.send p.pack, 0, '195.10.132.203', 67
 
 d, addr = s.recvfrom(1500)
 t = DHCP::Message.from_udp_payload(d)

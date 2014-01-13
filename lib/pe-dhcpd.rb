@@ -190,6 +190,16 @@ module PeDHCPd
            # send the packet back where it came from
            @socket.send omsg.pack, 0, addr[3], addr[1]
         end
+   
+        if MAIN_LOOP_HOOK.nil? == false
+          if MAIN_LOOP_HOOK.class == Class
+            MAIN_LOOP_HOOK.new.run
+          elsif MAIN_LOOP_HOOK.class == Proc
+            MAIN_LOOP_HOOK.call 
+          elsif MAIN_LOOP_HOOK.respond_to? :run
+            MAIN_LOOP_HOOK.run
+          end 
+        end
       end
     end
   end
