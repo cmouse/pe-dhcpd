@@ -15,12 +15,13 @@ require 'pe-dhcpd/macfilter'
 module PeDHCPd
   class Vars
     class << self
-    def log=(log)
-      @log = log
-    end
+      def log=(log)
+        @log = log
+      end
 
-    def log
-      @log
+      def log
+        @log
+      end
     end
   end
 

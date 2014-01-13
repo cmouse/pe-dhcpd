@@ -95,7 +95,7 @@ Daemons.run_proc('pe-dhcpd', { :dir_mode => :system }) do
     end
 
     app = PeDHCPd::DhcpServer.new(ip)
-    app.log = log
+    PeDHCPd::Vars.log = log
     app.run
   rescue Interrupt, SystemExit => e
     log.warn "Shutdown complete"
