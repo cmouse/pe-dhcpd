@@ -101,7 +101,22 @@ module PeDHCPd
       reply.type = type
       return reply
     end
-  
+ 
+    def call_hook(type, msg)
+      HOOKS[type].each do |hook|
+         if hook.class == Class 
+             return false unless hook.new.process(msg)
+         elsif hook.class == Proc
+             return false unless hook.call(msg)
+         elsif hook.responds_to? :process
+             return false unless hook.process(msg)
+         else
+             log.fatal "#{type.class} is not a Class or Hook, nor does it have process(msg)"
+         end
+      end
+      true
+    end
+ 
     def run
       log.info "TDC DHCP started - Binding to #{@ip}:67"
   
@@ -157,9 +172,13 @@ module PeDHCPd
   
            case imsg.type.type
               when MessageTypeOption::DISCOVER
+                next unless call_hook(:discover, imsg)
                 omsg = request2reply(imsg, MessageTypeOption::OFFER, 0x8000)
+                next unless call_hook(:offer, omsg)
               when MessageTypeOption::REQUEST
+                next unless call_hook(:request, imsg)
                 omsg = request2reply(imsg, MessageTypeOption::ACK, imsg.flags)
+                next unless call_hook(:acknowledge, omsg)
               else
                 next
            end

@@ -29,6 +29,29 @@ SUBNET_MASK = '255.255.255.254'
 #BLACKIST_MACS = %w{ b0:0b:00:00:00:00/24 test.addr.0000/40 }
 BLACKLIST_MACS = []
 
+# Define here one or more hooks to run at each stage
+# Remember to require your hooks! Hook must be a Class
+# or Proc
+#
+# HOOK SIGNATURE
+#   def process(msg)
+#
+# VALUES
+#   msg = A PeDHCPd::BootPacket instance
+#
+# RETURN VALUES
+#   false to drop packet
+#   anything else, keep packet
+#
+# Make sure you know what you are doing if you modify it
+
+HOOKS = {
+ :discover => [],
+ :offer => [],
+ :request => [],
+ :acknowledge => []
+}
+
 ## END CONFIGURATION ##
 
 # chkconfig for RedHat Linux...
