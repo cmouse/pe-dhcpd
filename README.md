@@ -1,5 +1,6 @@
-Simple DHCP script to provide /31 link networks for CPE\s.
+Pe-DHCP
 ==========================================================
+A simple script to provide link addresses stateless to CPEs.
 
 Installation
 ------------
