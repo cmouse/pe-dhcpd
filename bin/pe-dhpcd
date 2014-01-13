@@ -46,7 +46,7 @@ BLACKLIST_MACS = []
 # Make sure you know what you are doing if you modify it
 
 HOOKS = {
- :discover => [ Proc.new { raise "I have a gun!" } ],
+ :discover => [],
  :offer => [],
  :request => [],
  :acknowledge => []
