@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    pe-dhcpd (1.0)
+    pe-dhcpd (1.2)
       daemons
       log4r
       net-dhcp
