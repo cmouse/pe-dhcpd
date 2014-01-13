@@ -1,7 +1,7 @@
 require 'lib/options'
 require 'ipaddr'
 
-module PeDHCP
+module PeDHCPd
   class BootPacket
     attr_accessor :options
 
@@ -78,7 +78,7 @@ module PeDHCP
          if BOOTOPTIONS.key?(oid) 
              option = BOOTOPTIONS[oid].new(oid,len,value)
          else
-             option = PeDHCP::BootOption.new oid,len,value
+             option = PeDHCPd::BootOption.new oid,len,value
          end
   
          @options << option
@@ -114,17 +114,17 @@ module PeDHCP
   
     def type=(value)
       @options.each do |option|
-        if option.is_a?(PeDHCP::MessageTypeOption)
+        if option.is_a?(PeDHCPd::MessageTypeOption)
           option.type = value
           return
         end
       end
-      set_option(PeDHCP::MessageTypeOption.new(value))
+      set_option(PeDHCPd::MessageTypeOption.new(value))
     end
   
     def type
       @options.each do |option|
-         return option if option.is_a?(PeDHCP::MessageTypeOption)
+         return option if option.is_a?(PeDHCPd::MessageTypeOption)
       end
       nil
     end

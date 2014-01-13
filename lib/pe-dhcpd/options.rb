@@ -1,5 +1,5 @@
 # (c) Aki Tuomi 2011 - See license. 
-module PeDHCP
+module PeDHCPd
   class BootOption
     attr_accessor :key, :len, :value
   

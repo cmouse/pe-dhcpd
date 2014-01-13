@@ -1,4 +1,4 @@
-module PeDHCP
+module PeDHCPd
  class MacFilter
    def initialize(addr, prefix) 
      # convert into hex
