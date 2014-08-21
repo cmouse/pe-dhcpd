@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
    s.name = 'pe-dhcpd'
-   s.version = '1.2'
+   s.version = '1.3'
    s.licenses = 'MIT'
    s.platform = Gem::Platform::RUBY
    s.summary = 'A simple, extensible dhcp server for telco use'
