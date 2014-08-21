@@ -77,7 +77,7 @@ module PeDHCPd
      end
 
      def to_s
-       "Maximum DHCP Packet Size = " + @value.unpack('S').to_s + " seconds"
+       "Maximum DHCP Packet Size = " + @value.unpack('S').shift.to_s + " seconds"
      end
   end
 
@@ -232,7 +232,7 @@ module PeDHCPd
      end
   
      def to_s
-       "IP Address Lease Time = " + @value.unpack('N').to_s + " seconds"
+       "IP Address Lease Time = " + @value.unpack('N').shift.to_s + " seconds"
      end
   end
   
@@ -244,7 +244,7 @@ module PeDHCPd
      end
   
      def to_s
-       "Renewal Time Value = " + @value.unpack('N').to_s + " seconds"
+       "Renewal Time Value = " + @value.unpack('N').shift.to_s + " seconds"
      end
   end
   
@@ -256,7 +256,7 @@ module PeDHCPd
      end
  
      def to_s
-       "Rebinding Time Value = " + @value.unpack('N').to_s + " seconds"
+       "Rebinding Time Value = " + @value.unpack('N').shift.to_s + " seconds"
      end
   end
   
